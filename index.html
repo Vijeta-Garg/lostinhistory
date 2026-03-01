@@ -3,518 +3,541 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TextbookAnalytica</title>
+<title>Lost Herstory</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <style>
   :root {
-    --bg: #f9f7f3;
-    --paper: #fdfcfa;
-    --ink: #1c1c1c;
-    --ink-light: #5a5a5a;
-    --ink-dim: #aaa;
-    --rule: #e5e1d8;
-    --col-mentioned: #1d4ed8;
-    --col-missing: #b91c1c;
-    --col-concept: #5b21b6;
-    --text-max: 580px;
+    --bg:#f9f7f3; --paper:#fdfcfa; --ink:#1c1c1c; --ink-light:#5a5a5a;
+    --ink-dim:#aaa; --rule:#e5e1d8;
+    --col-mentioned:#1d4ed8; --col-missing:#b91c1c; --col-concept:#5b21b6;
   }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--ink);}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* ── TOPBAR ── */
+  .topbar{position:sticky;top:0;z-index:200;height:52px;background:var(--paper);border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 28px;gap:16px;box-shadow:0 1px 6px rgba(0,0,0,0.05);}
+  .logo{font-family:'Lora',serif;font-size:17px;font-weight:600;letter-spacing:-0.3px;color:var(--ink);margin-right:auto;text-decoration:none;}
+  .logo em{font-style:italic;color:var(--col-missing);}
+  .doc-chip{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--bg);border:1px solid var(--rule);color:var(--ink-dim);padding:3px 10px;border-radius:20px;max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .legend{display:flex;align-items:center;gap:14px;font-family:'Inter',sans-serif;font-size:11px;color:var(--ink-light);}
+  .leg{display:flex;align-items:center;gap:5px;}
+  .leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+  .btn-upload{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;background:none;color:var(--ink-light);border:1px solid var(--rule);padding:6px 14px;border-radius:5px;cursor:pointer;text-decoration:none;transition:border-color 0.2s,color 0.2s;}
+  .btn-upload:hover{border-color:var(--ink-light);color:var(--ink);}
 
-  body {
-    font-family: 'Lora', Georgia, serif;
-    background: var(--bg);
-    color: var(--ink);
-  }
+  /* Pulsing pill shown while waiting for ML result */
+  .status-pill{display:none;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--col-concept);background:rgba(91,33,182,0.07);border:1px solid rgba(91,33,182,0.2);padding:3px 12px;border-radius:20px;}
+  .status-pill.show{display:flex;}
+  .status-dot{width:6px;height:6px;border-radius:50%;background:var(--col-concept);animation:blink 1.2s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
 
-  /* ── TOP BAR ───────────────────────────────── */
-  .topbar {
-    position: sticky; top: 0; z-index: 200;
-    height: 50px;
-    background: var(--paper);
-    border-bottom: 1px solid var(--rule);
-    display: flex; align-items: center;
-    padding: 0 32px;
-    gap: 20px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-  }
-  .logo {
-    font-family: 'Lora', serif; font-size: 16px; font-weight: 600;
-    color: var(--ink); letter-spacing: -0.3px; margin-right: auto;
-  }
-  .logo em { font-style: italic; color: var(--col-missing); }
+  /* ── PAGE ── */
+  .page{position:relative;max-width:1100px;margin:0 auto;padding:56px 4px 120px;}
 
-  .legend {
-    display: flex; align-items: center; gap: 14px;
-    font-family: 'Inter', sans-serif; font-size: 11px; color: var(--ink-light);
-  }
-  .leg { display: flex; align-items: center; gap: 5px; }
-  .leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+  /* ── TEXT ── */
+  .text-body{max-width:680px;}
+  .doc-label{font-family:'Inter',sans-serif;font-size:10px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-dim);margin-bottom:10px;}
+  h1.doc-title{font-family:'Lora',serif;font-size:26px;font-weight:600;line-height:1.22;letter-spacing:-0.4px;margin-bottom:32px;color:var(--ink);}
+  .section-head{font-family:'Inter',sans-serif;font-size:9.5px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-dim);margin:32px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--rule);}
+  .para{font-size:15px;line-height:1.85;color:#2c2c2c;margin-bottom:20px;position:relative;transition:padding-left 0.4s ease,border-color 0.4s ease;border-left:2.5px solid transparent;}
+  .para.flagged{padding-left:14px;border-left-color:#c97316;}
+  .nm{color:var(--col-mentioned);font-weight:600;border-bottom:1.5px solid rgba(29,78,216,0.25);}
 
-  .btn {
-    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
-    letter-spacing: 0.6px; text-transform: uppercase;
-    background: var(--ink); color: var(--paper);
-    border: none; padding: 7px 16px; border-radius: 5px;
-    cursor: pointer; transition: background 0.2s;
-  }
-  .btn:hover { background: #333; }
-  .btn.done { background: var(--col-missing); pointer-events: none; }
+  /* Pulsing dot on right edge while paragraph is waiting for ML */
+  .para.awaiting::after{content:'';position:absolute;right:-18px;top:50%;transform:translateY(-50%);width:7px;height:7px;border-radius:50%;background:var(--col-concept);opacity:0.5;animation:blink 1.4s ease-in-out infinite;}
 
-  /* ── PAGE ──────────────────────────────────── */
-  .page {
-    position: relative;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 60px 32px 140px;
-  }
+  /* ── GRAPH SVG OVERLAY ── */
+  #graph-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;}
+  #graph-canvas .n-group{pointer-events:all;cursor:pointer;}
 
-  /* ── TEXT ──────────────────────────────────── */
-  .text-body {
-    max-width: var(--text-max);
-  }
+  /* ── TOOLTIP ── */
+  .tip{position:fixed;z-index:999;background:#1c1c1c;color:#f5f5f5;font-family:'Inter',sans-serif;font-size:12px;line-height:1.6;padding:12px 16px;border-radius:9px;max-width:260px;pointer-events:none;opacity:0;transition:opacity 0.15s;box-shadow:0 8px 28px rgba(0,0,0,0.35);}
+  .tip.show{opacity:1;}
+  .tip-name{font-size:14px;font-weight:700;margin-bottom:3px;font-family:'Lora',serif;}
+  .tip-role{font-family:'JetBrains Mono',monospace;font-size:10px;color:#fb923c;margin-bottom:7px;letter-spacing:0.3px;}
+  .tip-note{color:#ccc;font-size:11.5px;}
+  .tip-erasure{color:#fca5a5;font-size:11px;margin-top:6px;font-style:italic;}
 
-  .doc-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 10px; font-weight: 500; letter-spacing: 1.8px;
-    text-transform: uppercase; color: var(--ink-dim);
-    margin-bottom: 10px;
-  }
-  h1 {
-    font-family: 'Lora', serif; font-size: 26px; font-weight: 600;
-    line-height: 1.22; letter-spacing: -0.4px;
-    margin-bottom: 36px; color: var(--ink);
-  }
-  .section {
-    font-family: 'Inter', sans-serif;
-    font-size: 9.5px; font-weight: 600; letter-spacing: 1.8px;
-    text-transform: uppercase; color: var(--ink-dim);
-    margin: 34px 0 12px;
-    padding-bottom: 7px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .para {
-    font-size: 15px; line-height: 1.85; color: #2c2c2c;
-    margin-bottom: 20px; position: relative;
-    transition: padding-left 0.4s, border-left 0.4s;
-  }
-  .para.flagged {
-    padding-left: 14px;
-    border-left: 2.5px solid #c97316;
-  }
-
-  .nm { /* mentioned name */
-    color: var(--col-mentioned); font-weight: 600;
-    border-bottom: 1.5px solid rgba(29,78,216,0.25);
-    cursor: default;
-  }
-
-  /* ── GRAPH OVERLAY ─────────────────────────── */
-  #graph-canvas {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    overflow: visible;
-  }
-
-  #graph-canvas .n-group {
-    pointer-events: all;
-    cursor: pointer;
-  }
-
-  /* ── TOOLTIP ───────────────────────────────── */
-  .tip {
-    position: fixed; z-index: 999;
-    background: #1c1c1c; color: #f5f5f5;
-    font-family: 'Inter', sans-serif; font-size: 12px; line-height: 1.55;
-    padding: 11px 15px; border-radius: 8px; max-width: 230px;
-    pointer-events: none;
-    opacity: 0; transition: opacity 0.15s;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.3);
-  }
-  .tip.show { opacity: 1; }
-  .tip-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
-  .tip-role { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #f97316; margin-bottom: 6px; }
-  .tip-note { color: #ccc; }
-
-  /* ── FOOTER ────────────────────────────────── */
-  .footer {
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
-    height: 42px; background: var(--paper);
-    border-top: 1px solid var(--rule);
-    display: flex; align-items: center; padding: 0 32px; gap: 16px;
-    font-family: 'Inter', sans-serif; font-size: 11px; color: var(--ink-dim);
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.04);
-  }
-  .f-label { letter-spacing: 1px; text-transform: uppercase; font-size: 9.5px; }
-  .f-track { width: 160px; height: 3px; background: var(--rule); border-radius: 2px; overflow:hidden; }
-  .f-fill { height: 100%; background: linear-gradient(90deg, var(--col-missing), #c97316); width: 0%; transition: width 1.5s ease; }
-  .f-score { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink); }
-  .f-omit { margin-left: auto; font-family: 'JetBrains Mono', monospace; color: var(--col-missing); font-size: 11px; }
+  /* ── FOOTER ── */
+  .footer{position:fixed;bottom:0;left:0;right:0;z-index:200;height:46px;background:var(--paper);border-top:1px solid var(--rule);display:flex;align-items:center;padding:0 28px;gap:14px;font-family:'Inter',sans-serif;font-size:11px;color:var(--ink-dim);box-shadow:0 -2px 10px rgba(0,0,0,0.04);}
+  .f-label{letter-spacing:1px;text-transform:uppercase;font-size:9.5px;white-space:nowrap;}
+  .f-track{flex:1;max-width:420px;height:20px;background:var(--rule);border-radius:4px;overflow:hidden;display:flex;}
+  .f-women{height:100%;background:var(--col-missing);width:0%;transition:width 1.6s cubic-bezier(0.4,0,0.2,1);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:white;font-weight:500;white-space:nowrap;overflow:hidden;min-width:0;}
+  .f-men{height:100%;background:var(--col-mentioned);flex:1;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:white;font-weight:500;white-space:nowrap;}
+  .f-omit{margin-left:auto;font-family:'JetBrains Mono',monospace;color:var(--col-missing);font-size:11px;white-space:nowrap;}
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div class="logo">Textbook<em>Analytica</em></div>
+  <a class="logo" href="upload.html">Lost <em>Herstory</em></a>
+  <span class="doc-chip" id="docChip">Loading…</span>
+  <div class="status-pill" id="statusPill">
+    <span class="status-dot"></span>
+    <span id="statusText">Analyzing…</span>
+  </div>
   <div class="legend">
     <div class="leg"><div class="leg-dot" style="background:var(--col-mentioned)"></div>mentioned</div>
     <div class="leg"><div class="leg-dot" style="background:var(--col-missing)"></div>omitted</div>
     <div class="leg"><div class="leg-dot" style="background:var(--col-concept)"></div>concept</div>
   </div>
-  <button class="btn" id="analyzeBtn" onclick="runAnalysis()">▶ Analyze</button>
+  <a class="btn-upload" href="upload.html">↑ New upload</a>
 </div>
 
 <div class="page" id="page">
-
-  <div class="text-body">
-    <div class="doc-label">Biology · Chapter 4 · Molecular Genetics</div>
-    <h1>History</h1>
-
-    <div class="section">Chemical Basis of Heredity</div>
-    <p class="para" id="p0">
-      In 1953, James Watson and Francis Crick published their landmark paper in <i>Nature</i>, proposing that DNA takes the form of a double helix. Their model elegantly explained how genetic information could be stored and copied — the two strands of the helix could separate, each serving as a template for a new complementary strand. Watson and Crick's insight built upon earlier work establishing that DNA, not protein, was the carrier of genetic information. Maurice Wilkins, working at King's College London, had been studying DNA fibers using X-ray diffraction techniques, and his crystallographic data provided critical physical evidence for the helical structure. The famous "Photo 51," an X-ray diffraction image of extraordinary clarity, revealed the unmistakable signature of a helix and allowed Watson and Crick to refine the dimensions of their model. For their discovery, Watson, Crick, and Wilkins shared the 1962 Nobel Prize in Physiology or Medicine.
-    </p>
-
-    <p class="para" id="p1">
-      Key to determining DNA's structure was X-ray crystallography. Diffraction patterns revealed the molecule's helical geometry. <em>Photo 51</em> — among the clearest crystallographic images of DNA yet produced — provided precise angular measurements and helical parameters that proved decisive in finalizing the model.
-    </p>
-
-    <div class="section">Nuclear Fission and the Atomic Age</div>
-    <p class="para" id="p2">
-      The discovery of nuclear fission in 1938 fundamentally transformed both physics and world history. Otto Hahn, working at the Kaiser Wilhelm Institute in Berlin, bombarded uranium atoms with neutrons and observed that the uranium nucleus had split into lighter elements — barium among them. This was a stunning result that defied existing models of nuclear physics, which had assumed that bombarding heavy nuclei with neutrons would produce only slightly lighter elements. Hahn published his radiochemical findings, and the theoretical explanation soon followed: the uranium nucleus, when struck by a neutron, could divide into two roughly equal fragments, releasing an enormous amount of energy predicted by Einstein's mass-energy equivalence. For this discovery, Otto Hahn was awarded the 1944 Nobel Prize in Chemistry. The implications were immediate and far-reaching — within seven years, nuclear fission had been harnessed for both devastating weaponry and, eventually, civilian energy production.
-    </p>
-
-    <div class="section">Stellar Composition and the Hydrogen Universe</div>
-    <p class="para" id="p3">
-      For much of the early twentieth century, astronomers assumed that the Sun and other stars were composed of roughly the same mixture of elements found on Earth — primarily iron and other heavy elements. This seemed reasonable: spectroscopic analysis had revealed the presence of familiar elements in stellar atmospheres, and the prevailing view held that the cosmos was chemically homogeneous. Henry Norris Russell, one of the most influential astrophysicists of the era, championed this position throughout the 1920s. It was not until later analyses of stellar spectra and advances in quantum mechanics that the scientific community came to accept a radically different picture: stars are composed overwhelmingly of hydrogen and helium, with heavier elements present only in trace amounts. This insight was foundational — it reshaped models of stellar evolution, nucleosynthesis, and ultimately our understanding of the Big Bang and the chemical history of the universe.
-    </p>
-
-    <div class="section">Sex Determination and Chromosomal Theory</div>
-    <p class="para" id="p4">
-      The mechanism by which biological sex is determined was a major puzzle in early genetics. By the turn of the twentieth century, advances in microscopy had revealed that cells contained distinct structures called chromosomes, and several researchers suspected that these structures played a role in heredity. Edmund Beecher Wilson and Clarence Erwin McClung were among the key figures investigating the relationship between chromosomes and sex. Working with insects, researchers observed that certain chromosome pairs differed between males and females. The identification of the X and Y chromosomes — and the demonstration that the presence or absence of a specific chromosome determined sex — was a breakthrough that connected cytology to Mendelian genetics. Thomas Hunt Morgan later expanded on this chromosomal theory of inheritance through his famous experiments with <i>Drosophila</i> fruit flies, establishing that genes are carried on chromosomes and founding the field of modern genetics.
-    </p>
-
-    <div class="section">The Evolution of Wireless Communication</div>
-    <p class="para" id="p5">
-      Modern wireless communication rests on a foundation of innovations stretching back over a century. Guglielmo Marconi's successful transatlantic radio transmission in 1901 proved that electromagnetic waves could carry information across vast distances without wires. In the decades that followed, engineers steadily improved radio technology, developing amplitude and frequency modulation to encode audio signals. During World War II, the challenge of secure military communication spurred new thinking about how radio signals could be made resistant to jamming and interception. The concept of spread-spectrum communication — in which a signal is broadcast across a rapidly changing sequence of frequencies rather than a single fixed frequency — emerged as a powerful solution. This technique made signals both harder to detect and more resistant to interference. Spread-spectrum principles would prove foundational to the digital wireless revolution. By the late twentieth century, these ideas had been adapted and refined into the protocols underlying modern technologies including Wi-Fi, Bluetooth, and GPS navigation systems.
-    </p>
-
-  </div>
-
-  <!-- The single graph SVG lives inside .page so it shares the same coordinate space -->
+  <div class="text-body" id="textBody"></div>
   <svg id="graph-canvas"></svg>
-
 </div>
 
 <div class="tip" id="tip"></div>
 
 <div class="footer">
-  <span class="f-label">Completeness</span>
-  <div class="f-track"><div class="f-fill" id="fFill"></div></div>
-  <span class="f-score" id="fScore">—</span>
+  <span class="f-label">Gender Rep</span>
+  <div class="f-track">
+    <div class="f-women" id="fWomen"></div>
+    <div class="f-men" id="fMen">men</div>
+  </div>
   <span class="f-omit" id="fOmit"></span>
 </div>
 
-<script>
-// ─── CONFIG ─────────────────────────────────────────────────────────────────
-const C = {
-  mentioned: "#1d4ed8",
-  missing:   "#b91c1c",
-  concept:   "#5b21b6",
-};
-const FILL = {
-  mentioned: "rgba(29,78,216,0.10)",
-  missing:   "rgba(185,28,28,0.10)",
-  concept:   "rgba(91,33,182,0.10)",
-};
+<script type="module">
+import { initializeApp }                    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, onValue, off } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-// Each group: which paragraph to anchor to, and nodes + edges
-const groups = [
-  {
-    para: "p1",
-    nodes: [
-      { id: "watson",   label: "Watson",     type: "mentioned", r: 13 },
-      { id: "crick",    label: "Crick",       type: "mentioned", r: 13 },
-      { id: "dna",      label: "DNA Helix",   type: "concept",   r: 17 },
-      { id: "franklin", label: "R. Franklin", type: "missing",   r: 15,
-        role: "PRIMARY DISCOVERER",
-        note: "Franklin's X-ray data was used without her credit to confirm the double-helix. She is not named." },
-    ],
-    edges: [
-      { s:"watson",   t:"dna",      dash: false },
-      { s:"crick",    t:"dna",      dash: false },
-      { s:"franklin", t:"dna",      dash: true  },
-      { s:"franklin", t:"watson",   dash: true  },
-    ]
-  },
-  {
-    para: "p2",
-    nodes: [
-      { id: "hahn",    label: "O. Hahn",     type: "mentioned", r: 13 },
-      { id: "strass",  label: "Strassmann",  type: "mentioned", r: 12 },
-      { id: "fission", label: "Fission",     type: "concept",   r: 16 },
-      { id: "meitner", label: "L. Meitner",  type: "missing",   r: 15,
-        role: "CO-DISCOVERER — EXCLUDED FROM NOBEL",
-        note: "Meitner developed the theoretical framework for fission with Hahn. He alone received the 1944 Nobel Prize." },
-    ],
-    edges: [
-      { s:"hahn",    t:"fission", dash: false },
-      { s:"strass",  t:"fission", dash: false },
-      { s:"meitner", t:"fission", dash: true  },
-      { s:"meitner", t:"hahn",    dash: true  },
-    ]
-  },
-  {
-    para: "p3",
-    nodes: [
-      { id: "russell",  label: "H.N. Russell", type: "mentioned", r: 13 },
-      { id: "stellar",  label: "H Composition", type: "concept",  r: 17 },
-      { id: "payne",    label: "C. Payne",     type: "missing",   r: 15,
-        role: "DISCOVERER — STELLAR HYDROGEN ABUNDANCE",
-        note: "Cecilia Payne-Gaposchkin's 1925 thesis first demonstrated that stars are primarily hydrogen. Russell initially dismissed her finding, then published the same conclusion four years later. She is not named." },
-    ],
-    edges: [
-      { s:"russell", t:"stellar", dash: false },
-      { s:"payne",   t:"stellar", dash: true  },
-      { s:"payne",   t:"russell", dash: true  },
-    ]
-  },
-  {
-    para: "p4",
-    nodes: [
-      { id: "morgan",  label: "T.H. Morgan", type: "mentioned", r: 13 },
-      { id: "xy",      label: "XY System",   type: "concept",   r: 16 },
-      { id: "stevens", label: "N. Stevens",  type: "missing",   r: 15,
-        role: "DISCOVERER — XY SEX CHROMOSOMES",
-        note: "Stevens independently discovered the XY system before Morgan. She is absent from this account." },
-    ],
-    edges: [
-      { s:"morgan",  t:"xy",     dash: false },
-      { s:"stevens", t:"xy",     dash: true  },
-      { s:"stevens", t:"morgan", dash: true  },
-    ]
-  },
-  {
-    para: "p5",
-    nodes: [
-      { id: "marconi",  label: "Marconi",        type: "mentioned", r: 13 },
-      { id: "spread",   label: "Spread Spectrum", type: "concept",  r: 17 },
-      { id: "lamarr",   label: "H. Lamarr",      type: "missing",   r: 15,
-        role: "CO-INVENTOR — FREQUENCY-HOPPING SPREAD SPECTRUM",
-        note: "Hedy Lamarr and George Antheil patented frequency-hopping in 1942. Her foundational contribution to spread-spectrum technology is entirely absent from this passage." },
-    ],
-    edges: [
-      { s:"marconi", t:"spread", dash: false },
-      { s:"lamarr",  t:"spread", dash: true  },
-      { s:"lamarr",  t:"marconi", dash: true },
-    ]
-  }
+const app = initializeApp({ databaseURL: "https://lostinhistory-default-rtdb.firebaseio.com" });
+const db  = getDatabase(app);
+
+// ─── Session ID ────────────────────────────────────────────────────────────
+// Shared key so the ML backend knows which session to write results back to.
+// upload.html sets lh_sessionId; if missing we generate one for demo mode.
+const SESSION_ID = sessionStorage.getItem("lh_sessionId")
+  || ("demo_" + Math.random().toString(36).slice(2, 8));
+
+// ─── State ─────────────────────────────────────────────────────────────────
+const sentParas    = new Set();   // paraIds already sent to Firebase
+const drawnParas   = new Set();   // paraIds already drawn on graph
+const listeners    = {};          // paraId → unsubscribe fn (to clean up onValue)
+const omittedWomen = new Set();   // for footer bar
+
+// ─── D3 colors ─────────────────────────────────────────────────────────────
+const C    = { mentioned:"#1d4ed8", missing:"#b91c1c", concept:"#5b21b6" };
+const FILL = { mentioned:"rgba(29,78,216,0.10)", missing:"rgba(185,28,28,0.10)", concept:"rgba(91,33,182,0.10)" };
+
+// ─── Known names (for blue highlighting in text) ───────────────────────────
+const KNOWN_NAMES = [
+  "Watson","Crick","Wilkins","Gosling",
+  "Otto Hahn","Hahn","Strassmann",
+  "Henry Norris Russell","Russell",
+  "Edmund Beecher Wilson","Wilson","McClung",
+  "Thomas Hunt Morgan","Morgan",
+  "Marconi","Antheil","Einstein","Bohr","Shapley","Eddington"
 ];
 
-// ─── LAYOUT HELPERS ─────────────────────────────────────────────────────────
-function getParaRight(paraId) {
-  const page = document.getElementById("page");
-  const para = document.getElementById(paraId);
-  const pageRect = page.getBoundingClientRect();
-  const paraRect = para.getBoundingClientRect();
-  return {
-    x: paraRect.right - pageRect.left,
-    y: (paraRect.top + paraRect.bottom) / 2 - pageRect.top,
-  };
+// ═══════════════════════════════════════════════════════════════════════════
+// TEXT RENDERING
+// ═══════════════════════════════════════════════════════════════════════════
+function renderSections(sections, filename) {
+  const body = document.getElementById("textBody");
+  body.innerHTML = "";
+  document.getElementById("docChip").textContent = filename;
+
+  const lbl = document.createElement("div");
+  lbl.className = "doc-label";
+  lbl.textContent = "Lost Herstory · Omission Analysis";
+  body.appendChild(lbl);
+
+  const h1 = document.createElement("h1");
+  h1.className = "doc-title";
+  h1.textContent = filename.replace(/\.(txt|md)$/i,"");
+  body.appendChild(h1);
+
+  let idx = 0;
+  sections.forEach(sec => {
+    if (sec.heading) {
+      const sh = document.createElement("div");
+      sh.className = "section-head";
+      sh.textContent = sec.heading;
+      body.appendChild(sh);
+    }
+    sec.paragraphs.forEach(text => {
+      const p = document.createElement("p");
+      p.className = "para";
+      p.id = `p${idx}`;
+
+      // Highlight known mentioned names
+      let html = escHtml(text);
+      KNOWN_NAMES.forEach(name => {
+        html = html.replace(
+          new RegExp(`\\b${escRe(name)}\\b`, "g"),
+          `<span class="nm">${name}</span>`
+        );
+      });
+      p.innerHTML = html;
+      body.appendChild(p);
+      idx++;
+    });
+  });
 }
 
-function getPageWidth() {
-  return document.getElementById("page").getBoundingClientRect().width;
+function escHtml(s) {
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+function escRe(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
 }
 
-// ─── DRAW ────────────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════════
+// INTERSECTION OBSERVER
+// When a paragraph scrolls into view:
+//   1. Send { paraId, text, sessionId } to Firebase under current_paragraph/
+//   2. Start listening on results/{sessionId}/{paraId} for the ML response
+// ═══════════════════════════════════════════════════════════════════════════
+function setupObserver() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const paraEl = entry.target;
+      const paraId = paraEl.id;
+      if (sentParas.has(paraId)) return;   // already sent
+      sentParas.add(paraId);
+      sendParagraph(paraId, paraEl.innerText.trim());
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll(".para").forEach(p => observer.observe(p));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SEND PARAGRAPH TO FIREBASE
+// Writes to: current_paragraph/{sessionId}
+//   { paraId, text, timestamp, status: "pending" }
+//
+// The ML backend should:
+//   1. Read from current_paragraph/{sessionId}
+//   2. Process the text
+//   3. Write result to: results/{sessionId}/{paraId}
+//      { nodes: [...], edges: [...] }
+// ═══════════════════════════════════════════════════════════════════════════
+async function sendParagraph(paraId, text) {
+  const paraEl = document.getElementById(paraId);
+  if (paraEl) paraEl.classList.add("awaiting");   // show pulsing dot
+  showPill(`Analyzing ${paraId}…`);
+
+  try {
+    // Write the current paragraph being viewed
+    await set(ref(db, `current_paragraph/${SESSION_ID}`), {
+      paraId,
+      text,
+      sessionId: SESSION_ID,
+      timestamp: Date.now(),
+      status: "pending",
+    });
+  } catch (err) {
+    console.warn("Firebase write error:", err);
+    // Still attempt to listen — maybe write perms differ from read perms
+  }
+
+  // Start listening for ML result for this specific paragraph
+  listenForResult(paraId);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// LISTEN FOR ML RESULT
+// Watches: results/{sessionId}/{paraId}
+// When the ML model writes { nodes, edges } here, draw the graph.
+// ═══════════════════════════════════════════════════════════════════════════
+function listenForResult(paraId) {
+  if (listeners[paraId]) return;   // already listening
+
+  const resultRef = ref(db, `results/${SESSION_ID}/${paraId}`);
+
+  const unsub = onValue(resultRef, snapshot => {
+    const result = snapshot.val();
+    if (!result) return;           // nothing written yet
+    if (drawnParas.has(paraId)) return;
+
+    // Clean up listener — we only need the result once
+    off(resultRef);
+    delete listeners[paraId];
+
+    // Draw the nodes
+    drawGroup(paraId, result);
+
+    // Remove awaiting dot
+    const paraEl = document.getElementById(paraId);
+    if (paraEl) paraEl.classList.remove("awaiting");
+
+    hidePill();
+  });
+
+  listeners[paraId] = unsub;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// STATUS PILL
+// ═══════════════════════════════════════════════════════════════════════════
+function showPill(msg) {
+  document.getElementById("statusPill").classList.add("show");
+  document.getElementById("statusText").textContent = msg;
+}
+function hidePill() {
+  // Only hide if no paragraphs are still awaiting
+  const anyAwaiting = document.querySelector(".para.awaiting");
+  if (!anyAwaiting) document.getElementById("statusPill").classList.remove("show");
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GRAPH DRAWING
+// result shape expected from ML:
+// {
+//   nodes: [{ id, label, fullLabel?, type, role?, note?, erasure? }],
+//   edges: [{ s, t, dash }]   (s/t are node ids)
+// }
+// ═══════════════════════════════════════════════════════════════════════════
 const svg = d3.select("#graph-canvas");
-let allSimulations = [];
 
 function setSvgSize() {
   const page = document.getElementById("page");
-  svg
-    .attr("width",  page.scrollWidth)
-    .attr("height", page.scrollHeight);
+  svg.attr("width", page.scrollWidth).attr("height", page.scrollHeight);
 }
 
-function drawGroup(groupIndex) {
-  const g = groups[groupIndex];
-  const anchor = getParaRight(g.para);
-  const pageW  = getPageWidth();
+function getAnchor(paraId) {
+  const page  = document.getElementById("page");
+  const para  = document.getElementById(paraId);
+  if (!para || !page) return null;
+  const pr    = page.getBoundingClientRect();
+  const ar    = para.getBoundingClientRect();
+  const scrollY = window.scrollY || window.pageYOffset;
+  return {
+    x: ar.right  - pr.left,
+    y: (ar.top + ar.bottom) / 2 - pr.top + scrollY,
+  };
+}
 
-  const marginLeft  = anchor.x + 24;
-  const marginRight = pageW - 16;
+function measureLabel(label, isMissing) {
+  const tmp = document.createElementNS("http://www.w3.org/2000/svg","svg");
+  tmp.style.cssText = "visibility:hidden;position:absolute;top:-9999px;left:-9999px;";
+  document.body.appendChild(tmp);
+  const t = document.createElementNS("http://www.w3.org/2000/svg","text");
+  t.style.fontFamily = isMissing ? "Lora,serif" : "Inter,sans-serif";
+  t.style.fontSize   = "12px";
+  t.style.fontWeight = isMissing ? "600" : "500";
+  t.textContent = label;
+  tmp.appendChild(t);
+  const w = t.getComputedTextLength();
+  document.body.removeChild(tmp);
+  return { rx: Math.max(w / 2 + 18, 28), ry: 18 };
+}
+
+function drawGroup(paraId, result) {
+  if (drawnParas.has(paraId)) return;
+  drawnParas.add(paraId);
+
+  const anchor = getAnchor(paraId);
+  if (!anchor) return;
+
+  // Flag the paragraph
+  const paraEl = document.getElementById(paraId);
+  if (paraEl) paraEl.classList.add("flagged");
+
+  const nodes = Array.isArray(result.nodes) ? result.nodes : [];
+  const edges = Array.isArray(result.edges) ? result.edges : [];
+
+  if (nodes.length === 0) return;
+
+  // Track omitted women for footer
+  nodes.filter(n => n.type === "missing")
+       .forEach(n => omittedWomen.add(n.fullLabel || n.label));
+
+  const pageW       = document.getElementById("page").getBoundingClientRect().width;
+  const marginLeft  = anchor.x + 20;
+  const marginRight = pageW - 8;
   const marginW     = marginRight - marginLeft;
-  const marginH     = 160;
-
   const cx = marginLeft + marginW / 2;
   const cy = anchor.y;
 
-  const nodes = g.nodes.map((n, i) => ({
-    ...n,
-    x: cx + (Math.random() - 0.5) * 40,
-    y: cy + (Math.random() - 0.5) * 40,
-  }));
+  // Measure label sizes for rounded-rect sizing
+  nodes.forEach(n => {
+    const m = measureLabel(n.label, n.type === "missing");
+    n.rx = m.rx; n.ry = m.ry;
+  });
+
+  // Spread starting X positions evenly across margin
+  nodes.forEach((n, i) => {
+    n.x = marginLeft + (marginW / (nodes.length + 1)) * (i + 1);
+    n.y = cy + (Math.random() - 0.5) * 20;
+  });
 
   const nodeMap = Object.fromEntries(nodes.map(n => [n.id, n]));
-  const links = g.edges.map(e => ({
-    source: nodeMap[e.s],
-    target: nodeMap[e.t],
-    dash: e.dash,
-  }));
+  const links = edges
+    .filter(e => nodeMap[e.s] && nodeMap[e.t])
+    .map(e => ({ source: nodeMap[e.s], target: nodeMap[e.t], dash: !!e.dash }));
 
-  const grpEl = svg.append("g").attr("class", `group-${groupIndex}`);
+  const grp = svg.append("g");
 
-  // ── edges ──
-  const linkSel = grpEl.selectAll("line")
-    .data(links).enter().append("line")
+  // ── Edges ──
+  const linkSel = grp.selectAll("line").data(links).enter().append("line")
     .attr("stroke", d =>
-      (d.source.type === "missing" || d.target.type === "missing")
-        ? C.missing : "#bbb")
-    .attr("stroke-width", 1.2)
-    .attr("stroke-opacity", 0.5)
+      (d.source.type === "missing" || d.target.type === "missing") ? C.missing : "#bbb")
+    .attr("stroke-width", 1.3)
+    .attr("stroke-opacity", 0.45)
     .attr("stroke-dasharray", d => d.dash ? "5 3" : "none");
 
-  // ── nodes ──
-  const nodeG = grpEl.selectAll("g")
-    .data(nodes).enter().append("g")
-    .attr("class", "n-group")
+  // ── Node groups ──
+  const nodeG = grp.selectAll("g").data(nodes).enter().append("g")
+    .attr("class","n-group")
     .on("mouseover", showTip)
     .on("mousemove", moveTip)
     .on("mouseout",  hideTip);
 
-  // soft glow ring for missing
-  nodeG.filter(d => d.type === "missing")
-    .append("circle")
-    .attr("r", d => d.r + 7)
-    .attr("fill", "rgba(185,28,28,0.06)")
-    .attr("stroke", C.missing)
-    .attr("stroke-width", 0.8)
-    .attr("stroke-opacity", 0.3)
-    .attr("stroke-dasharray", "3 2");
+  // Glow halo for missing nodes
+  nodeG.filter(d => d.type === "missing").append("rect")
+    .attr("x",  d => -(d.rx + 9)).attr("y", d => -(d.ry + 9))
+    .attr("width",  d => (d.rx + 9) * 2)
+    .attr("height", d => (d.ry + 9) * 2)
+    .attr("rx", 10).attr("ry", 10)
+    .attr("fill","rgba(185,28,28,0.05)")
+    .attr("stroke", C.missing).attr("stroke-width", 0.8)
+    .attr("stroke-opacity", 0.22).attr("stroke-dasharray","3 2");
 
-  const circles = nodeG.append("circle")
-    .attr("r", 0)
-    .attr("fill", d => FILL[d.type])
-    .attr("stroke", d => C[d.type])
-    .attr("stroke-width", d => d.type === "missing" ? 2 : 1.5);
+  // Main rounded rect — blooms in from 0
+  const rects = nodeG.append("rect")
+    .attr("x",0).attr("y",0).attr("width",0).attr("height",0)
+    .attr("rx",8).attr("ry",8)
+    .attr("fill",  d => FILL[d.type])
+    .attr("stroke",d => C[d.type])
+    .attr("stroke-width",d => d.type === "missing" ? 2.5 : 1.8);
 
-  circles.transition().duration(450).delay((_, i) => i * 90)
-    .attr("r", d => d.r);
+  rects.transition().duration(450).delay((_,i) => i * 80)
+    .attr("x",d => -d.rx).attr("y",d => -d.ry)
+    .attr("width",d => d.rx * 2).attr("height",d => d.ry * 2);
 
-  // labels
+  // Label text
   nodeG.append("text")
-    .attr("text-anchor", "middle")
-    .attr("dy", "0.35em")
+    .attr("text-anchor","middle").attr("dy","0.35em")
     .text(d => d.label)
     .style("font-family", d => d.type === "missing" ? "'Lora',serif" : "'Inter',sans-serif")
-    .style("font-size", d => d.type === "concept" ? "8px" : "8.5px")
+    .style("font-size","12px")
     .style("font-weight", d => d.type === "missing" ? "600" : "500")
     .style("fill", d => C[d.type])
-    .style("pointer-events", "none")
-    .attr("opacity", 0)
-    .transition().duration(300).delay((_, i) => i * 90 + 350)
-    .attr("opacity", 1);
+    .style("pointer-events","none")
+    .attr("opacity",0)
+    .transition().duration(300).delay((_,i) => i * 80 + 350)
+    .attr("opacity",1);
 
-  // "omitted" micro-label under missing nodes
-  nodeG.filter(d => d.type === "missing")
-    .append("text")
-    .attr("text-anchor", "middle")
-    .attr("dy", d => d.r + 11)
+  // "omitted" sublabel under missing nodes
+  nodeG.filter(d => d.type === "missing").append("text")
+    .attr("text-anchor","middle")
+    .attr("dy", d => d.ry + 13)
     .text("omitted")
-    .style("font-family", "'JetBrains Mono',monospace")
-    .style("font-size", "7px")
-    .style("fill", C.missing)
-    .style("fill-opacity", 0.65)
-    .style("pointer-events", "none");
+    .style("font-family","'JetBrains Mono',monospace")
+    .style("font-size","9px")
+    .style("fill", C.missing).style("fill-opacity",0.6)
+    .style("pointer-events","none");
 
-  // ── force simulation ──
+  // ── Force simulation — horizontal spread, tight vertical ──
   const sim = d3.forceSimulation(nodes)
-    .force("link",    d3.forceLink(links).distance(50).strength(0.6))
-    .force("charge",  d3.forceManyBody().strength(-100))
-    .force("centerX", d3.forceX(cx).strength(0.12))
-    .force("centerY", d3.forceY(cy).strength(0.12))
-    .force("collide", d3.forceCollide(d => d.r + 12));
+    .force("link",    d3.forceLink(links).distance(85).strength(0.3))
+    .force("charge",  d3.forceManyBody().strength(-200))
+    .force("centerX", d3.forceX(cx).strength(0.05))
+    .force("centerY", d3.forceY(cy).strength(0.65))
+    .force("collide", d3.forceCollide(d => d.rx + 14));
 
   sim.on("tick", () => {
     nodes.forEach(n => {
-      n.x = Math.max(marginLeft + n.r + 4, Math.min(marginRight - n.r - 4, n.x));
-      n.y = Math.max(anchor.y - marginH, Math.min(anchor.y + marginH, n.y));
+      n.x = Math.max(marginLeft + n.rx + 4, Math.min(marginRight - n.rx - 4, n.x));
+      n.y = Math.max(anchor.y - 75,         Math.min(anchor.y + 75,          n.y));
     });
     linkSel
-      .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
-      .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
-    nodeG.attr("transform", d => `translate(${d.x},${d.y})`);
+      .attr("x1",d=>d.source.x).attr("y1",d=>d.source.y)
+      .attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+    nodeG.attr("transform",d=>`translate(${d.x},${d.y})`);
   });
 
   setTimeout(() => sim.stop(), 5000);
-  allSimulations.push(sim);
+  updateFooter();
 }
 
-// ─── TOOLTIP ────────────────────────────────────────────────────────────────
-const tipEl = document.getElementById("tip");
+// ═══════════════════════════════════════════════════════════════════════════
+// FOOTER
+// ═══════════════════════════════════════════════════════════════════════════
+function updateFooter() {
+  const wCount = omittedWomen.size;
+  if (wCount === 0) return;
+  const wPct = Math.round((wCount / (wCount + 8)) * 100);
+  document.getElementById("fWomen").style.width = `${wPct}%`;
+  document.getElementById("fWomen").textContent = `women ${wPct}%`;
+  document.getElementById("fMen").textContent   = `men ${100 - wPct}%`;
+  document.getElementById("fOmit").textContent  =
+    `${wCount} woman${wCount !== 1 ? "en" : ""} omitted`;
+}
 
+// ═══════════════════════════════════════════════════════════════════════════
+// TOOLTIP
+// ═══════════════════════════════════════════════════════════════════════════
+const tipEl = document.getElementById("tip");
 function showTip(event, d) {
-  if (!d.note) return;
+  if (!d.note && !d.role) return;
   tipEl.innerHTML = `
-    <div class="tip-name">${d.label}</div>
-    <div class="tip-role">${d.role || ""}</div>
-    <div class="tip-note">${d.note}</div>`;
+    <div class="tip-name">${d.fullLabel || d.label}</div>
+    ${d.role    ? `<div class="tip-role">${d.role}</div>` : ""}
+    ${d.note    ? `<div class="tip-note">${d.note}</div>` : ""}
+    ${d.erasure ? `<div class="tip-erasure">↳ ${d.erasure}</div>` : ""}`;
   tipEl.classList.add("show");
   moveTip(event);
 }
 function moveTip(event) {
-  let x = event.clientX + 14, y = event.clientY - 10;
-  if (x + 240 > window.innerWidth) x = event.clientX - 250;
-  tipEl.style.left = x + "px";
-  tipEl.style.top  = y + "px";
+  let x = event.clientX + 16, y = event.clientY - 12;
+  if (x + 270 > window.innerWidth) x = event.clientX - 276;
+  tipEl.style.left = x + "px"; tipEl.style.top = y + "px";
 }
 function hideTip() { tipEl.classList.remove("show"); }
 
-// ─── ANALYSIS SEQUENCE ──────────────────────────────────────────────────────
-let ran = false;
+// ═══════════════════════════════════════════════════════════════════════════
+// DEMO SECTIONS (fallback when opening index.html directly)
+// ═══════════════════════════════════════════════════════════════════════════
+const DEMO_SECTIONS = [
+  { heading:"Chapter 3: The Structure of DNA", paragraphs:[
+    "In 1953, James Watson and Francis Crick published their landmark paper in Nature, proposing that DNA takes the form of a double helix. Their model elegantly explained how genetic information could be stored and copied — the two strands of the helix could separate, each serving as a template for a new complementary strand.",
+    "Watson and Crick's insight built upon earlier work establishing that DNA, not protein, was the carrier of genetic information. Maurice Wilkins, working at King's College London, had been studying DNA fibers using X-ray diffraction techniques, and his crystallographic data provided critical physical evidence for the helical structure. The famous Photo 51, an X-ray diffraction image of extraordinary clarity, revealed the unmistakable signature of a helix and allowed Watson and Crick to refine the dimensions of their model.",
+  ]},
+  { heading:"Chapter 7: Nuclear Fission and the Atomic Age", paragraphs:[
+    "The discovery of nuclear fission in 1938 fundamentally transformed both physics and world history. Otto Hahn, working at the Kaiser Wilhelm Institute in Berlin, bombarded uranium atoms with neutrons and observed that the uranium nucleus had split into lighter elements. Hahn published his radiochemical findings, and the theoretical explanation soon followed. For this discovery, Otto Hahn was awarded the 1944 Nobel Prize in Chemistry.",
+  ]},
+  { heading:"Chapter 12: Stellar Composition and the Hydrogen Universe", paragraphs:[
+    "For much of the early twentieth century, astronomers assumed that the Sun and other stars were composed of roughly the same mixture of elements found on Earth. Henry Norris Russell, one of the most influential astrophysicists of the era, championed this position throughout the 1920s. It was not until later analyses of stellar spectra that the scientific community came to accept a radically different picture: stars are composed overwhelmingly of hydrogen and helium.",
+  ]},
+  { heading:"Chapter 9: Sex Determination and Chromosomal Theory", paragraphs:[
+    "The mechanism by which biological sex is determined was a major puzzle in early genetics. Edmund Beecher Wilson and Clarence Erwin McClung were among the key figures investigating the relationship between chromosomes and sex. The identification of the X and Y chromosomes was a breakthrough that connected cytology to Mendelian genetics. Thomas Hunt Morgan later expanded on this chromosomal theory through his experiments with Drosophila fruit flies.",
+  ]},
+  { heading:"Chapter 15: The Evolution of Wireless Communication", paragraphs:[
+    "Modern wireless communication rests on a foundation of innovations stretching back over a century. Guglielmo Marconi's successful transatlantic radio transmission in 1901 proved that electromagnetic waves could carry information across vast distances without wires. The concept of spread-spectrum communication — in which a signal is broadcast across a rapidly changing sequence of frequencies — emerged as a powerful solution. By the late twentieth century, these ideas had been adapted into protocols underlying modern technologies including Wi-Fi, Bluetooth, and GPS navigation systems.",
+  ]},
+];
 
-function runAnalysis() {
-  if (ran) return;
-  ran = true;
+// ═══════════════════════════════════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════════════════════════════════
+window.addEventListener("load", () => {
+  const sectionsRaw = sessionStorage.getItem("lh_sections");
+  const filename    = sessionStorage.getItem("lh_filename") || "Demo document";
 
-  const btn = document.getElementById("analyzeBtn");
-  btn.textContent = "Analyzing…";
-  btn.classList.add("done");
+  sessionStorage.removeItem("lh_sections");
+  sessionStorage.removeItem("lh_filename");
+  sessionStorage.removeItem("lh_sessionId");
 
+  let sections = DEMO_SECTIONS;
+  if (sectionsRaw) {
+    try { sections = JSON.parse(sectionsRaw); } catch(e) {}
+  }
+
+  renderSections(sections, filename);
   setSvgSize();
+  setupObserver();
+});
 
-  const schedule = [
-    { para: "p1", groupIdx: 0, delay: 400  },
-    { para: "p2", groupIdx: 1, delay: 1100 },
-    { para: "p3", groupIdx: 2, delay: 1900 },
-    { para: "p4", groupIdx: 3, delay: 2700 },
-    { para: "p5", groupIdx: 4, delay: 3500 },
-  ];
-
-  schedule.forEach(({ para, groupIdx, delay }) => {
-    setTimeout(() => {
-      document.getElementById(para).classList.add("flagged");
-      drawGroup(groupIdx);
-    }, delay);
-  });
-
-  // score
-  setTimeout(() => {
-    document.getElementById("fFill").style.width  = "25%";
-    document.getElementById("fScore").textContent = "25%";
-    document.getElementById("fOmit").textContent  = "5 omissions detected";
-    btn.textContent = "✓ Done";
-  }, 4400);
-}
-
-// ─── INIT ────────────────────────────────────────────────────────────────────
-window.addEventListener("load",   setSvgSize);
-window.addEventListener("resize", () => { setSvgSize(); });
+window.addEventListener("resize", setSvgSize);
 </script>
 </body>
 </html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lost Herstory — Upload</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f9f7f3; --paper:#fdfcfa; --ink:#1c1c1c; --ink-light:#5a5a5a;
+    --ink-dim:#aaa; --rule:#e5e1d8; --col-missing:#b91c1c; --col-concept:#5b21b6;
+    --missing-light:rgba(185,28,28,0.07);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;}
+  .topbar{height:52px;background:var(--paper);border-bottom:1px solid var(--rule);display:flex;align-items:center;padding:0 36px;gap:12px;box-shadow:0 1px 6px rgba(0,0,0,0.05);flex-shrink:0;}
+  .logo{font-family:'Lora',serif;font-size:17px;font-weight:600;letter-spacing:-0.3px;color:var(--ink);}
+  .logo em{font-style:italic;color:var(--col-missing);}
+  .topbar-crumb{font-family:'Inter',sans-serif;font-size:12px;color:var(--ink-dim);}
+  .main{flex:1;display:flex;align-items:center;justify-content:center;padding:52px 20px;}
+  .card{background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:48px 52px;max-width:600px;width:100%;box-shadow:0 4px 28px rgba(0,0,0,0.07);}
+  .card-title{font-family:'Lora',serif;font-size:24px;font-weight:600;letter-spacing:-0.4px;margin-bottom:8px;}
+  .card-sub{font-family:'Inter',sans-serif;font-size:13px;color:var(--ink-light);line-height:1.6;margin-bottom:34px;}
+  .dropzone{border:2px dashed var(--rule);border-radius:10px;padding:36px 24px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;position:relative;margin-bottom:10px;}
+  .dropzone:hover,.dropzone.over{border-color:var(--col-missing);background:var(--missing-light);}
+  .dropzone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+  .dz-icon{font-size:32px;margin-bottom:10px;display:block;}
+  .dz-title{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+  .dz-sub{font-family:'Inter',sans-serif;font-size:12px;color:var(--ink-dim);}
+  .dz-types{display:flex;justify-content:center;gap:6px;margin-top:12px;flex-wrap:wrap;}
+  .dz-type{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--bg);border:1px solid var(--rule);color:var(--ink-light);padding:2px 8px;border-radius:4px;}
+  .file-preview{display:none;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--rule);border-radius:8px;padding:12px 16px;margin-bottom:10px;}
+  .file-preview.show{display:flex;}
+  .fp-icon{font-size:22px;flex-shrink:0;}
+  .fp-info{flex:1;min-width:0;}
+  .fp-name{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .fp-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-dim);margin-top:2px;}
+  .fp-remove{background:none;border:none;cursor:pointer;font-size:15px;color:var(--ink-dim);padding:4px;border-radius:4px;transition:color 0.15s;flex-shrink:0;}
+  .fp-remove:hover{color:var(--col-missing);}
+  .divider{display:flex;align-items:center;gap:12px;margin:20px 0;}
+  .divider hr{flex:1;border:none;border-top:1px solid var(--rule);}
+  .divider span{font-family:'Inter',sans-serif;font-size:11px;color:var(--ink-dim);}
+  .paste-label{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:var(--ink-light);letter-spacing:0.5px;text-transform:uppercase;display:block;margin-bottom:8px;}
+  textarea{width:100%;min-height:130px;font-family:'Lora',serif;font-size:14px;line-height:1.7;color:var(--ink);background:var(--bg);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;resize:vertical;outline:none;transition:border-color 0.2s;margin-bottom:28px;}
+  textarea:focus{border-color:var(--col-concept);}
+  textarea::placeholder{color:var(--ink-dim);font-style:italic;}
+  .btn-analyze{width:100%;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.4px;background:var(--ink);color:var(--paper);border:none;padding:15px;border-radius:8px;cursor:pointer;transition:background 0.2s,transform 0.1s;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .btn-analyze:hover{background:#2a2a2a;}
+  .btn-analyze:active{transform:scale(0.99);}
+  .processing{display:none;flex-direction:column;align-items:center;gap:18px;text-align:center;padding:12px 0;}
+  .processing.show{display:flex;}
+  .spinner{width:34px;height:34px;border:3px solid var(--rule);border-top-color:var(--col-missing);border-radius:50%;animation:spin 0.75s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .proc-title{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--ink);}
+  .proc-steps{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-dim);line-height:2.1;text-align:left;}
+  .proc-step{opacity:0.25;transition:opacity 0.35s,color 0.35s;}
+  .proc-step.active{opacity:1;color:var(--ink);}
+  .proc-step.done{opacity:1;color:var(--col-concept);}
+  .proc-session{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-dim);margin-top:8px;}
+  .err-banner{background:rgba(185,28,28,0.08);border:1px solid rgba(185,28,28,0.2);border-radius:8px;padding:12px 16px;font-family:'Inter',sans-serif;font-size:12px;color:var(--col-missing);margin-top:16px;display:none;}
+  .err-banner.show{display:block;}
+  .page-footer{text-align:center;padding:18px;font-family:'Inter',sans-serif;font-size:11px;color:var(--ink-dim);border-top:1px solid var(--rule);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">Lost <em>Herstory</em></div>
+  <span class="topbar-crumb">/ Upload Document</span>
+</div>
+
+<div class="main">
+  <div class="card">
+    <div id="formView">
+      <div class="card-title">Upload a textbook</div>
+      <div class="card-sub">Drop a file or paste text from any chapter. Each paragraph will be sent to our ML pipeline — the viewer will animate nodes in as results arrive.</div>
+
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="fileInput" accept=".txt,.md" />
+        <span class="dz-icon">📄</span>
+        <div class="dz-title">Drop a file or click to browse</div>
+        <div class="dz-sub">Plain text files supported</div>
+        <div class="dz-types"><span class="dz-type">.txt</span><span class="dz-type">.md</span></div>
+      </div>
+
+      <div class="file-preview" id="filePreview">
+        <span class="fp-icon">📄</span>
+        <div class="fp-info">
+          <div class="fp-name" id="fpName"></div>
+          <div class="fp-meta" id="fpMeta"></div>
+        </div>
+        <button class="fp-remove" id="fpRemove">✕</button>
+      </div>
+
+      <div class="divider"><hr /><span>or paste text directly</span><hr /></div>
+      <label class="paste-label">Plain text</label>
+      <textarea id="pasteArea" placeholder="Paste a paragraph, chapter, or any passage here…" rows="6"></textarea>
+
+      <button class="btn-analyze" onclick="startAnalysis()">▶&nbsp; Analyze document</button>
+      <div class="err-banner" id="errBanner"></div>
+    </div>
+
+    <div class="processing" id="processingView">
+      <div class="spinner"></div>
+      <div class="proc-title">Sending to analysis pipeline…</div>
+      <div class="proc-steps">
+        <div class="proc-step" id="s1">① Parsing paragraphs</div>
+        <div class="proc-step" id="s2">② Generating session ID</div>
+        <div class="proc-step" id="s3">③ Writing to Firebase</div>
+        <div class="proc-step" id="s4">④ ML pipeline queued</div>
+        <div class="proc-step" id="s5">⑤ Opening viewer</div>
+      </div>
+      <div class="proc-session" id="sessionLabel"></div>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">Lost Herstory · Gender bias &amp; omission detection for educational texts</div>
+
+<script type="module">
+import { initializeApp }         from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const app = initializeApp({ databaseURL: "https://lostinhistory-default-rtdb.firebaseio.com" });
+const db  = getDatabase(app);
+
+// ── File handling ─────────────────────────────────────────────────
+let fileText = null;
+const fileInput   = document.getElementById("fileInput");
+const dropzone    = document.getElementById("dropzone");
+const filePreview = document.getElementById("filePreview");
+
+fileInput.addEventListener("change", e => loadFile(e.target.files[0]));
+dropzone.addEventListener("dragover",  e => { e.preventDefault(); dropzone.classList.add("over"); });
+dropzone.addEventListener("dragleave", ()  => dropzone.classList.remove("over"));
+dropzone.addEventListener("drop", e => {
+  e.preventDefault(); dropzone.classList.remove("over");
+  if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+document.getElementById("fpRemove").addEventListener("click", () => {
+  fileText = null; filePreview.classList.remove("show");
+  dropzone.style.display = ""; fileInput.value = "";
+});
+
+function loadFile(file) {
+  document.getElementById("fpName").textContent = file.name;
+  document.getElementById("fpMeta").textContent =
+    `${file.name.split(".").pop().toUpperCase()} · ${(file.size/1024).toFixed(1)} KB`;
+  filePreview.classList.add("show");
+  dropzone.style.display = "none";
+  const reader = new FileReader();
+  reader.onload = e => { fileText = e.target.result; };
+  reader.readAsText(file);
+}
+
+// ── Text parsing ──────────────────────────────────────────────────
+// Returns: [{ heading, paragraphs: [string] }]
+function parseIntoSections(raw) {
+  const lines = raw.split(/\n/).map(l => l.trim()).filter(Boolean);
+  const sections = [];
+  let cur = { heading: null, paragraphs: [] };
+
+  for (const line of lines) {
+    const isHeading =
+      /^(chapter\s+\d+|section\s+[\d.]+)/i.test(line) ||
+      (line.length < 100 && !line.endsWith('.') && /^[A-Z]/.test(line) &&
+       !/[a-z]{20,}/.test(line)); // headings rarely have very long lowercase runs
+    if (isHeading) {
+      if (cur.paragraphs.length > 0) sections.push(cur);
+      cur = { heading: line, paragraphs: [] };
+    } else if (line.length > 50) {
+      cur.paragraphs.push(line);
+    }
+  }
+  if (cur.paragraphs.length > 0) sections.push(cur);
+  return sections;
+}
+
+// ── Helpers ───────────────────────────────────────────────────────
+const delay = ms => new Promise(r => setTimeout(r, ms));
+
+function activate(id) {
+  document.querySelectorAll(".proc-step.active").forEach(s => {
+    s.classList.remove("active"); s.classList.add("done");
+  });
+  document.getElementById(id).classList.add("active");
+}
+
+function showError(msg) {
+  const b = document.getElementById("errBanner");
+  b.textContent = msg; b.classList.add("show");
+  document.getElementById("formView").style.display = "";
+  document.getElementById("processingView").classList.remove("show");
+}
+
+// ── Main ──────────────────────────────────────────────────────────
+window.startAnalysis = async function() {
+  const pasteText = document.getElementById("pasteArea").value.trim();
+  const text = fileText || pasteText;
+  if (!text) {
+    const ta = document.getElementById("pasteArea");
+    ta.style.borderColor = "var(--col-missing)"; ta.focus();
+    setTimeout(() => ta.style.borderColor = "", 1500);
+    return;
+  }
+
+  document.getElementById("formView").style.display = "none";
+  document.getElementById("processingView").classList.add("show");
+
+  // Step 1 — parse
+  activate("s1");
+  const sections = parseIntoSections(text);
+  const totalParas = sections.reduce((n, s) => n + s.paragraphs.length, 0);
+  await delay(380);
+
+  // Step 2 — session ID
+  activate("s2");
+  const sessionId = "lh_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7);
+  document.getElementById("sessionLabel").textContent = `session: ${sessionId}`;
+  await delay(320);
+
+  // Step 3 — write to Firebase
+  activate("s3");
+
+  // Build paragraph map: paraId → { heading, text, sectionIdx, paraIdx, status }
+  const paragraphMap = {};
+  let pIdx = 0;
+  sections.forEach((sec, si) => {
+    sec.paragraphs.forEach((paraText, pi) => {
+      const paraId = `p${pIdx}`;
+      paragraphMap[paraId] = {
+        paraId,
+        sectionIdx: si,
+        paraIdx:    pi,
+        heading:    sec.heading || "",
+        text:       paraText,
+        status:     "pending",
+        // ML pipeline writes results under: sessions/{sessionId}/paragraphs/{paraId}/result
+        // result shape: { nodes: [...], edges: [...] }
+      };
+      pIdx++;
+    });
+  });
+
+  try {
+    await set(ref(db, `sessions/${sessionId}`), {
+      createdAt:  Date.now(),
+      filename:   document.getElementById("fpName").textContent || "Pasted text",
+      totalParas,
+      status:     "pending",
+      paragraphs: paragraphMap,
+    });
+  } catch (err) {
+    showError(`Firebase error: ${err.message}. Check database rules allow writes.`);
+    return;
+  }
+  await delay(350);
+
+  // Step 4 — queued
+  activate("s4");
+  await delay(480);
+
+  // Step 5 — hand off
+  activate("s5");
+  sessionStorage.setItem("lh_sessionId", sessionId);
+  sessionStorage.setItem("lh_sections",  JSON.stringify(sections));
+  sessionStorage.setItem("lh_filename",  document.getElementById("fpName").textContent || "Pasted text");
+  await delay(350);
+
+  window.location.href = "index.html";
+};
+</script>
+</body>
+</html>
