@@ -15,7 +15,7 @@ from graph_engine import GraphEngine
 
 engine = GraphEngine("knowledge_graph.json")
 
-# test it
+# test 
 text = "Watson and Crick discovered DNA. Rosalind Franklin took Photo 51. Nettie Stevens discovered sex chromosomes."
 names = extract_nouns(text)
 print("Names found:", names)

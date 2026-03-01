@@ -1,10 +1,16 @@
 """
-purp
+graph_engine.py
+---------------
+Plug this into your backend. 
+The LLM/NER person gives you a list of names extracted from the PDF.
+This file does everything else: builds the graph, finds missing women,
+calculates gender ratio, ranks omissions by importance.
 
-riya gives  list of names extracted from the PDF
-builds graph, finds missing women,
-calculates gender ratio, ranks omissions by importance
-
+Usage:
+    from graph_engine import GraphEngine
+    engine = GraphEngine("knowledge_graph.json")
+    results = engine.analyze(["Watson", "Crick", "Darwin", "Mendel"])
+    print(results)
 """
 
 import json
@@ -14,14 +20,14 @@ from collections import deque
 
 class GraphEngine:
     def __init__(self, knowledge_graph_path: str):
-        
+        """Load the knowledge graph JSON and build a NetworkX graph."""
         with open(knowledge_graph_path, "r") as f:
             self.data = json.load(f)
 
-        #entry for quick lookup
+        # Map name → entry for quick lookup
         self.people = {entry["name"]: entry for entry in self.data}
 
-        # build a lookup by last name and common short name
+        # Also build a lookup by last name and common short names for fuzzy matching
         self.name_index = {}
         for entry in self.data:
             full = entry["name"].lower()
@@ -29,17 +35,17 @@ class GraphEngine:
             self.name_index[full] = entry["name"]
             self.name_index[last] = entry["name"]  # "Franklin" → "Rosalind Franklin"
 
-    #graph buil
+        # Build the reference graph
         self.graph = nx.Graph()
         self._build_graph()
 
-        # centrality scores (slow on huge graphs, fine for 150 nodes)
+        # Pre-compute centrality scores (slow on huge graphs, fine for 150 nodes)
         self.betweenness = nx.betweenness_centrality(self.graph, weight=None)
         self.pagerank = nx.pagerank(self.graph)
 
     def _build_graph(self):
         """Add all people as nodes, then connect them via connected_people."""
-        #node
+        # Add nodes
         for entry in self.data:
             self.graph.add_node(
                 entry["name"],
@@ -52,10 +58,10 @@ class GraphEngine:
                 connected_concepts=entry.get("connected_concepts", []),
             )
 
-        # edge
+        # Add edges
         for entry in self.data:
             for connected_name in entry.get("connected_people", []):
-                # resolve short names like "Watson" → "James Watson"
+                # Try to resolve short names like "Watson" → "James Watson"
                 resolved = self._resolve_name(connected_name)
                 if resolved and resolved in self.graph:
                     self.graph.add_edge(entry["name"], resolved, relationship="connected_to")
@@ -71,21 +77,45 @@ class GraphEngine:
                 return val
         return None
 
-    def _resolve_extracted_names(self, extracted_names: list[str]) -> list[str]:
+    def _resolve_extracted_names(self, extracted_names):
         """
-        Take riyas and resolve to full names in  graph
-        Returns list 
+        Handles split names like ["Rosalind", "Franklin"] -> "Rosalind Franklin"
+        Also deduplicates so "Nettie" and "Nettie Stevens" dont both appear.
         """
         resolved = []
-        for name in extracted_names:
+        i = 0
+        joined_names = []
+        while i < len(extracted_names):
+            if i + 1 < len(extracted_names):
+                combined = extracted_names[i] + " " + extracted_names[i + 1]
+                if combined.lower() in self.name_index:
+                    joined_names.append(combined)
+                    i += 2
+                    continue
+            joined_names.append(extracted_names[i])
+            i += 1
+        for name in joined_names:
             r = self._resolve_name(name)
             if r:
                 resolved.append(r)
-        return list(set(resolved))
+        # Deduplicate: if both "Nettie Stevens" and "Nettie Maria Stevens" resolved,
+        # keep only the one whose name appears as a substring of another (drop the shorter)
+        resolved = list(set(resolved))
+        final = []
+        for name in resolved:
+            # keep this name only if no other resolved name contains it as a substring
+            is_subset = any(
+                name != other and name.lower() in other.lower()
+                for other in resolved
+            )
+            if not is_subset:
+                final.append(name)
+        return final
 
     def bfs_find_missing_women(self, mentioned_names: list[str], depth: int = 2) -> list[dict]:
         """
-        BFS from each mentioned node in the reference graph
+        BFS from each mentioned node in the reference graph.
+        Find women within `depth` hops who are NOT in the document.
         Returns list of missing women with their info.
         """
         mentioned_set = set(mentioned_names)
@@ -112,7 +142,7 @@ class GraphEngine:
 
                     node_data = self.graph.nodes[neighbor]
 
-                    # Flag if female AND not in document
+                    # Flag if: female AND not in document
                     if node_data.get("gender") == "female" and neighbor not in mentioned_set:
                         if neighbor not in missing_women:
                             missing_women[neighbor] = {
@@ -141,6 +171,7 @@ class GraphEngine:
     def rank_omissions(self, missing_women: list[dict]) -> list[dict]:
         """
         Sort missing women by composite importance score.
+        Score = 0.4 * importance_weight + 0.35 * pagerank_normalized + 0.25 * betweenness_normalized
         Higher score = bigger omission = show first / bigger node in graph.
         """
         if not missing_women:
@@ -189,11 +220,15 @@ class GraphEngine:
 
     def analyze(self, extracted_names: list[str], bfs_depth: int = 2) -> dict:
         """
-        MAIN FUNCTION — call this with the list of names from llm
+        MAIN FUNCTION — call this with the list of names from the NER/LLM person.
         
-        Returns everything needed for the frontend
+        Returns everything needed for the frontend:
+        - resolved names found in our graph
+        - missing women ranked by importance
+        - gender ratio stats
+        - graph data (nodes + edges) formatted for D3 / react-force-graph
         """
-        # Resolve names 
+        # Resolve names to our graph
         resolved = self._resolve_extracted_names(extracted_names)
 
         # Find missing women via BFS
@@ -203,7 +238,7 @@ class GraphEngine:
         # Gender ratio
         gender_stats = self.calculate_gender_ratio(resolved)
 
-        # Build graph  for frontend
+        # Build graph payload for frontend
         graph_data = self._build_frontend_graph(resolved, missing_ranked)
 
         return {
@@ -217,6 +252,7 @@ class GraphEngine:
     def _completeness_score(self, mentioned: list[str], missing: list[dict]) -> float:
         """
         How complete is the document's representation?
+        Score = mentioned women / (mentioned women + missing women)
         0.0 = no women mentioned, 1.0 = no women missing
         """
         mentioned_women = sum(
@@ -230,12 +266,12 @@ class GraphEngine:
 
     def _build_frontend_graph(self, mentioned: list[str], missing: list[dict]) -> dict:
         """
-        Format for react-force-graph 
+        Format nodes and edges for react-force-graph or D3.
         
         Node colors:
         - blue: mentioned male
         - green: mentioned female  
-        - pink/glow: missing female 
+        - pink/glow: missing female (the reveal!)
         """
         nodes = []
         links = []
@@ -259,7 +295,7 @@ class GraphEngine:
             })
             added_nodes.add(name)
 
-        # Add missing women nodes 
+        # Add missing women nodes (these bloom in during the animation)
         for woman in missing:
             name = woman["name"]
             if name in added_nodes:
@@ -268,7 +304,7 @@ class GraphEngine:
                 "id": name,
                 "label": name,
                 "gender": "female",
-                "status": "missing",  
+                "status": "missing",  # frontend uses this to trigger glow animation
                 "color": "#ff69b4",
                 "glow": True,
                 "size": 6 + woman["omission_score"] * 20,
@@ -296,30 +332,32 @@ class GraphEngine:
         return {"nodes": nodes, "links": links}
 
 
-# TESTNG
 if __name__ == "__main__":
     engine = GraphEngine("knowledge_graph.json")
 
-
     extracted = ["Rosalind Franklin", "Marie Curie", "Watson", "Crick", "Otto Hahn", "Joshua Lederberg"]
-
     results = engine.analyze(extracted)
 
-    print("=== MENTIONED FIGURES ===")
-    print(results["mentioned_figures"])
+    line = "-" * 40
+    print(line)
+    print("UNWRITTEN - ANALYSIS RESULTS")
+    print(line)
 
-    print("\n=== GENDER RATIO ===")
-    print(results["gender_ratio"])
+    print("Names found:")
+    for name in results["mentioned_figures"]:
+        print(f"  {name}")
 
-    print("\n=== TOP 5 MISSING WOMEN ===")
+    print("\nMissing women (ranked by importance):")
     for w in results["missing_women"][:5]:
-        print(f"  {w['name']} (score: {w['omission_score']})")
-        print(f"    Connected to: {w['connected_to_mentioned']}")
+        print(f"  {w['name']} (importance: {w['omission_score']})")
+        print(f"    Connected to: {', '.join(w['connected_to_mentioned'])}")
         print(f"    Why she matters: {w['erasure_pattern']}")
 
-    print("\n=== COMPLETENESS SCORE ===")
-    print(results["completeness_score"])
+    print("\nGender ratio:")
+    print(f"  {results['gender_ratio']['representation_percent']}% women mentioned")
+    print(f"  {results['gender_ratio']['female_count']} women / {results['gender_ratio']['male_count']} men")
 
-    print("\n=== GRAPH (first 3 nodes) ===")
-    for node in results["graph"]["nodes"][:3]:
-        print(node)
+    print("\nCompleteness score:")
+    print(f"  {results['completeness_score']} out of 1.0")
+
+    print(line)
