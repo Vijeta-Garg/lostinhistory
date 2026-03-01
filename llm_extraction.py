@@ -1,6 +1,4 @@
 import spacy
-# from graph_engine import GraphEngine
-
 def extract_nouns(text):
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(text)
