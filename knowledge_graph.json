@@ -1,0 +1,2941 @@
+[
+  {
+    "name": "Rosalind Franklin",
+    "gender": "female",
+    "fields": [
+      "X-ray crystallography",
+      "DNA structure",
+      "virology"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "DNA double helix",
+      "Photo 51",
+      "B-form DNA",
+      "A-form DNA"
+    ],
+    "connected_people": [
+      "Watson",
+      "Crick",
+      "Wilkins",
+      "Gosling"
+    ],
+    "era": "1940s-1950s",
+    "nationality": "British",
+    "importance_weight": 0.98,
+    "common_erasure_pattern": "credited as technician rather than co-discoverer; Watson mocked her in The Double Helix"
+  },
+  {
+    "name": "Lise Meitner",
+    "gender": "female",
+    "fields": [
+      "nuclear physics",
+      "radioactivity",
+      "fission"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "nuclear fission",
+      "radioactivity",
+      "protactinium"
+    ],
+    "connected_people": [
+      "Otto Hahn",
+      "Fritz Strassmann",
+      "Niels Bohr"
+    ],
+    "era": "1900s-1940s",
+    "nationality": "Austrian-Swedish",
+    "importance_weight": 0.97,
+    "common_erasure_pattern": "Hahn won Nobel Prize for fission; Meitner excluded despite being co-discoverer"
+  },
+  {
+    "name": "Cecilia Payne-Gaposchkin",
+    "gender": "female",
+    "fields": [
+      "astronomy",
+      "astrophysics",
+      "stellar composition"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "stellar composition",
+      "hydrogen abundance",
+      "stellar classification"
+    ],
+    "connected_people": [
+      "Henry Norris Russell",
+      "Harlow Shapley",
+      "Arthur Eddington"
+    ],
+    "era": "1920s-1950s",
+    "nationality": "British-American",
+    "importance_weight": 0.96,
+    "common_erasure_pattern": "Russell initially dismissed her finding that stars are mostly hydrogen, later published it as his own conclusion"
+  },
+  {
+    "name": "Nettie Stevens",
+    "gender": "female",
+    "fields": [
+      "genetics",
+      "cytology",
+      "sex determination"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "sex chromosomes",
+      "XY sex determination",
+      "chromosomal theory of heredity"
+    ],
+    "connected_people": [
+      "Edmund Beecher Wilson",
+      "Thomas Hunt Morgan"
+    ],
+    "era": "1900s",
+    "nationality": "American",
+    "importance_weight": 0.93,
+    "common_erasure_pattern": "Wilson received credit for discovery of sex chromosomes despite Stevens' earlier independent discovery"
+  },
+  {
+    "name": "Hedy Lamarr",
+    "gender": "female",
+    "fields": [
+      "communications technology",
+      "spread spectrum",
+      "wireless"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "frequency hopping",
+      "spread spectrum",
+      "WiFi",
+      "GPS",
+      "Bluetooth"
+    ],
+    "connected_people": [
+      "George Antheil"
+    ],
+    "era": "1940s",
+    "nationality": "Austrian-American",
+    "importance_weight": 0.9,
+    "common_erasure_pattern": "remembered as actress, not inventor; patent expired before military adopted her technology"
+  },
+  {
+    "name": "Katherine Johnson",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "orbital mechanics",
+      "aerospace"
+    ],
+    "contribution_type": "essential_contributor",
+    "connected_concepts": [
+      "lunar orbit",
+      "Apollo 11",
+      "Friendship 7",
+      "trajectory calculations"
+    ],
+    "connected_people": [
+      "John Glenn",
+      "Alan Shepard",
+      "Dorothy Vaughan",
+      "Mary Jackson"
+    ],
+    "era": "1950s-1980s",
+    "nationality": "American",
+    "importance_weight": 0.95,
+    "common_erasure_pattern": "NASA's Black women computers entirely omitted from space race narratives for decades"
+  },
+  {
+    "name": "Dorothy Vaughan",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "computing",
+      "FORTRAN programming"
+    ],
+    "contribution_type": "essential_contributor",
+    "connected_concepts": [
+      "FORTRAN",
+      "IBM computers",
+      "NASA SCOUT launch vehicle"
+    ],
+    "connected_people": [
+      "Katherine Johnson",
+      "Mary Jackson",
+      "John Glenn"
+    ],
+    "era": "1940s-1970s",
+    "nationality": "American",
+    "importance_weight": 0.91,
+    "common_erasure_pattern": "Hidden Figures; NASA's Black women computers erased from space race history"
+  },
+  {
+    "name": "Mary Jackson",
+    "gender": "female",
+    "fields": [
+      "aerospace engineering",
+      "mathematics"
+    ],
+    "contribution_type": "essential_contributor",
+    "connected_concepts": [
+      "wind tunnel",
+      "supersonic flight",
+      "NASA aeronautics"
+    ],
+    "connected_people": [
+      "Katherine Johnson",
+      "Dorothy Vaughan"
+    ],
+    "era": "1950s-1980s",
+    "nationality": "American",
+    "importance_weight": 0.89,
+    "common_erasure_pattern": "Hidden Figures; NASA's Black women computers erased from space race history"
+  },
+  {
+    "name": "Emmy Noether",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "abstract algebra",
+      "theoretical physics"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "Noether's theorem",
+      "abstract algebra",
+      "ring theory",
+      "conservation laws"
+    ],
+    "connected_people": [
+      "Albert Einstein",
+      "David Hilbert",
+      "Felix Klein"
+    ],
+    "era": "1900s-1930s",
+    "nationality": "German",
+    "importance_weight": 0.97,
+    "common_erasure_pattern": "Einstein called her the most significant creative mathematical genius yet she was barred from university positions"
+  },
+  {
+    "name": "Ada Lovelace",
+    "gender": "female",
+    "fields": [
+      "computing",
+      "mathematics",
+      "algorithms"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "first algorithm",
+      "Analytical Engine",
+      "computer programming",
+      "looping"
+    ],
+    "connected_people": [
+      "Charles Babbage"
+    ],
+    "era": "1830s-1840s",
+    "nationality": "British",
+    "importance_weight": 0.96,
+    "common_erasure_pattern": "framed as Babbage's assistant rather than first programmer"
+  },
+  {
+    "name": "Grace Hopper",
+    "gender": "female",
+    "fields": [
+      "computing",
+      "programming languages",
+      "compiler theory"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "COBOL",
+      "first compiler",
+      "debugging",
+      "machine-independent programming"
+    ],
+    "connected_people": [
+      "Howard Aiken",
+      "John von Neumann"
+    ],
+    "era": "1940s-1980s",
+    "nationality": "American",
+    "importance_weight": 0.95,
+    "common_erasure_pattern": "contributions to programming languages often attributed to male colleagues or institutions"
+  },
+  {
+    "name": "Barbara McClintock",
+    "gender": "female",
+    "fields": [
+      "genetics",
+      "cytogenetics",
+      "maize genetics"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "transposons",
+      "jumping genes",
+      "genetic recombination",
+      "maize cytogenetics"
+    ],
+    "connected_people": [
+      "Thomas Hunt Morgan",
+      "George Beadle"
+    ],
+    "era": "1930s-1980s",
+    "nationality": "American",
+    "importance_weight": 0.94,
+    "common_erasure_pattern": "ignored for 30 years before Nobel Prize; male geneticists dismissed her transposon findings"
+  },
+  {
+    "name": "Chien-Shiung Wu",
+    "gender": "female",
+    "fields": [
+      "nuclear physics",
+      "particle physics",
+      "beta decay"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "parity violation",
+      "beta decay",
+      "Wu experiment",
+      "weak nuclear force"
+    ],
+    "connected_people": [
+      "Tsung-Dao Lee",
+      "Chen-Ning Yang",
+      "Enrico Fermi"
+    ],
+    "era": "1940s-1970s",
+    "chien_shiung_wu": "American",
+    "nationality": "Chinese-American",
+    "importance_weight": 0.96,
+    "common_erasure_pattern": "Lee and Yang won Nobel for predicting parity violation; Wu who proved it experimentally was excluded"
+  },
+  {
+    "name": "Maryam Mirzakhani",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "geometry",
+      "Riemann surfaces"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "Riemann surfaces",
+      "moduli spaces",
+      "teichmüller theory",
+      "Fields Medal"
+    ],
+    "connected_people": [
+      "Curtis McMullen",
+      "Alex Eskin"
+    ],
+    "era": "2000s-2010s",
+    "nationality": "Iranian-American",
+    "importance_weight": 0.95,
+    "common_erasure_pattern": "first and only woman to win Fields Medal; underrepresented in math history narratives"
+  },
+  {
+    "name": "Vera Rubin",
+    "gender": "female",
+    "fields": [
+      "astronomy",
+      "astrophysics",
+      "cosmology"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "dark matter",
+      "galaxy rotation curves",
+      "spiral galaxies"
+    ],
+    "connected_people": [
+      "Kent Ford",
+      "Fritz Zwicky",
+      "Margaret Burbidge"
+    ],
+    "era": "1960s-2000s",
+    "nationality": "American",
+    "importance_weight": 0.96,
+    "common_erasure_pattern": "never received Nobel despite dark matter being one of the most important astrophysics discoveries"
+  },
+  {
+    "name": "Jocelyn Bell Burnell",
+    "gender": "female",
+    "fields": [
+      "astrophysics",
+      "radio astronomy"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "pulsars",
+      "neutron stars",
+      "radio telescope"
+    ],
+    "connected_people": [
+      "Antony Hewish",
+      "Martin Ryle"
+    ],
+    "era": "1960s-1970s",
+    "nationality": "British",
+    "importance_weight": 0.94,
+    "common_erasure_pattern": "discovered pulsars as PhD student; supervisor Hewish won Nobel Prize, she was excluded"
+  },
+  {
+    "name": "Harriet Zuckerman",
+    "gender": "female",
+    "fields": [
+      "sociology of science"
+    ],
+    "contribution_type": "researcher",
+    "connected_concepts": [
+      "Matilda Effect",
+      "gender bias in science",
+      "Nobel laureates"
+    ],
+    "connected_people": [
+      "Robert Merton",
+      "Jonathan Cole"
+    ],
+    "era": "1970s-1990s",
+    "nationality": "American",
+    "importance_weight": 0.75,
+    "common_erasure_pattern": "work on gender bias in science itself underrepresented"
+  },
+  {
+    "name": "Margaret Hamilton",
+    "gender": "female",
+    "fields": [
+      "software engineering",
+      "computing",
+      "aerospace"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "Apollo flight software",
+      "software engineering",
+      "asynchronous systems",
+      "priority scheduling"
+    ],
+    "connected_people": [
+      "Neil Armstrong",
+      "Buzz Aldrin"
+    ],
+    "era": "1960s-1970s",
+    "nationality": "American",
+    "importance_weight": 0.94,
+    "common_erasure_pattern": "Apollo 11 software she wrote credited to NASA broadly; her role minimized for decades"
+  },
+  {
+    "name": "Alice Ball",
+    "gender": "female",
+    "fields": [
+      "chemistry",
+      "medicine",
+      "pharmacology"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "leprosy treatment",
+      "chaulmoogra oil injection",
+      "Hansen's disease"
+    ],
+    "connected_people": [
+      "Harry Hollmann",
+      "Arthur Dean"
+    ],
+    "era": "1910s",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "Arthur Dean published her method after her death without credit; called it 'Dean Method' for years"
+  },
+  {
+    "name": "Françoise Barré-Sinoussi",
+    "gender": "female",
+    "fields": [
+      "virology",
+      "immunology",
+      "HIV research"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "HIV",
+      "AIDS",
+      "retrovirus",
+      "LAV"
+    ],
+    "connected_people": [
+      "Luc Montagnier",
+      "Robert Gallo"
+    ],
+    "era": "1980s-2000s",
+    "nationality": "French",
+    "importance_weight": 0.93,
+    "common_erasure_pattern": "won Nobel with Montagnier but Gallo controversy overshadowed her specific contributions"
+  },
+  {
+    "name": "Tu Youyou",
+    "gender": "female",
+    "fields": [
+      "pharmacology",
+      "traditional medicine",
+      "malaria research"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "artemisinin",
+      "malaria treatment",
+      "qinghao"
+    ],
+    "connected_people": [
+      "Ying Luo",
+      "Guitang Liu"
+    ],
+    "era": "1970s-2000s",
+    "nationality": "Chinese",
+    "importance_weight": 0.94,
+    "common_erasure_pattern": "worked anonymously in collective research system; not widely known until Nobel Prize in 2015"
+  },
+  {
+    "name": "Esther Lederberg",
+    "gender": "female",
+    "fields": [
+      "microbiology",
+      "genetics",
+      "bacteriology"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "lambda phage",
+      "bacterial conjugation",
+      "replica plating",
+      "F factor"
+    ],
+    "connected_people": [
+      "Joshua Lederberg",
+      "George Beadle"
+    ],
+    "era": "1940s-1960s",
+    "nationality": "American",
+    "importance_weight": 0.9,
+    "common_erasure_pattern": "husband Joshua won Nobel for work she co-developed; replica plating method credited to them both but she is rarely named"
+  },
+  {
+    "name": "Mileva Marić",
+    "gender": "female",
+    "fields": [
+      "physics",
+      "mathematics"
+    ],
+    "contribution_type": "disputed_contributor",
+    "connected_concepts": [
+      "special relativity",
+      "Brownian motion",
+      "photoelectric effect"
+    ],
+    "connected_people": [
+      "Albert Einstein"
+    ],
+    "era": "1900s",
+    "nationality": "Serbian",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": "Einstein's first wife and collaborator; extent of her contribution to his 1905 papers disputed but consistently minimized"
+  },
+  {
+    "name": "Gerty Cori",
+    "gender": "female",
+    "fields": [
+      "biochemistry",
+      "metabolism",
+      "enzymology"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "Cori cycle",
+      "glycogen metabolism",
+      "glucose-1-phosphate",
+      "enzyme deficiency diseases"
+    ],
+    "connected_people": [
+      "Carl Cori",
+      "Bernardo Houssay"
+    ],
+    "era": "1920s-1950s",
+    "nationality": "Czech-American",
+    "importance_weight": 0.92,
+    "common_erasure_pattern": "worked alongside husband; universities refused to hire her as equal; Nobel Prize shared with husband"
+  },
+  {
+    "name": "Dorothy Hodgkin",
+    "gender": "female",
+    "fields": [
+      "crystallography",
+      "biochemistry",
+      "structural biology"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "penicillin structure",
+      "insulin structure",
+      "vitamin B12 structure",
+      "X-ray crystallography"
+    ],
+    "connected_people": [
+      "John Bernal",
+      "Rosalind Franklin",
+      "Margaret Thatcher"
+    ],
+    "era": "1930s-1960s",
+    "nationality": "British",
+    "importance_weight": 0.93,
+    "common_erasure_pattern": "headline described her Nobel win as 'housewife wins Nobel Prize'"
+  },
+  {
+    "name": "Irène Joliot-Curie",
+    "gender": "female",
+    "fields": [
+      "nuclear physics",
+      "radioactivity",
+      "artificial radioactivity"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "artificial radioactivity",
+      "positron",
+      "nuclear isomers"
+    ],
+    "connected_people": [
+      "Marie Curie",
+      "Frédéric Joliot-Curie",
+      "James Chadwick"
+    ],
+    "era": "1920s-1950s",
+    "nationality": "French",
+    "importance_weight": 0.91,
+    "common_erasure_pattern": "overshadowed by mother Marie Curie; her own Nobel Prize-winning work underrepresented"
+  },
+  {
+    "name": "Marie Curie",
+    "gender": "female",
+    "fields": [
+      "physics",
+      "chemistry",
+      "radioactivity"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "radioactivity",
+      "polonium",
+      "radium",
+      "X-ray units"
+    ],
+    "connected_people": [
+      "Pierre Curie",
+      "Henri Becquerel",
+      "Irène Joliot-Curie"
+    ],
+    "era": "1890s-1930s",
+    "nationality": "Polish-French",
+    "importance_weight": 0.99,
+    "common_erasure_pattern": "framed primarily as wife of Pierre Curie; second Nobel Prize in Chemistry often omitted"
+  },
+  {
+    "name": "Hypatia of Alexandria",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "astronomy",
+      "philosophy"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "conic sections",
+      "Diophantus commentary",
+      "astrolabe",
+      "Neoplatonism"
+    ],
+    "connected_people": [
+      "Theon of Alexandria",
+      "Synesius"
+    ],
+    "era": "400s CE",
+    "nationality": "Egyptian-Greek",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "murdered by mob; remembered as martyr rather than mathematician"
+  },
+  {
+    "name": "Sophia Germain",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "number theory",
+      "elasticity theory"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "Fermat's Last Theorem",
+      "elasticity",
+      "vibrating surfaces",
+      "Sophie Germain primes"
+    ],
+    "connected_people": [
+      "Carl Friedrich Gauss",
+      "Adrien-Marie Legendre",
+      "Joseph-Louis Lagrange"
+    ],
+    "era": "1790s-1830s",
+    "nationality": "French",
+    "importance_weight": 0.9,
+    "common_erasure_pattern": "had to use male pseudonym 'Monsieur LeBlanc' to correspond with mathematicians"
+  },
+  {
+    "name": "Florence Nightingale",
+    "gender": "female",
+    "fields": [
+      "statistics",
+      "nursing",
+      "public health",
+      "data visualization"
+    ],
+    "contribution_type": "innovator",
+    "connected_concepts": [
+      "polar area diagram",
+      "hospital sanitation",
+      "evidence-based medicine",
+      "data visualization"
+    ],
+    "connected_people": [
+      "William Farr",
+      "Sidney Herbert"
+    ],
+    "era": "1850s-1900s",
+    "nationality": "British",
+    "importance_weight": 0.92,
+    "common_erasure_pattern": "remembered as nurse, not statistician and data visualization pioneer"
+  },
+  {
+    "name": "Henrietta Lacks",
+    "gender": "female",
+    "fields": [
+      "cell biology",
+      "oncology"
+    ],
+    "contribution_type": "involuntary_contributor",
+    "connected_concepts": [
+      "HeLa cells",
+      "cell culture",
+      "polio vaccine",
+      "cancer research"
+    ],
+    "connected_people": [
+      "George Gey",
+      "Jonas Salk"
+    ],
+    "era": "1950s",
+    "nationality": "American",
+    "importance_weight": 0.93,
+    "common_erasure_pattern": "cells taken without consent; identity hidden for decades; family not compensated"
+  },
+  {
+    "name": "Rosalyn Yalow",
+    "gender": "female",
+    "fields": [
+      "medical physics",
+      "endocrinology",
+      "nuclear medicine"
+    ],
+    "contribution_type": "co-inventor",
+    "connected_concepts": [
+      "radioimmunoassay",
+      "insulin measurement",
+      "hormone detection"
+    ],
+    "connected_people": [
+      "Solomon Berson",
+      "Roger Guillemin"
+    ],
+    "era": "1950s-1970s",
+    "nationality": "American",
+    "importance_weight": 0.9,
+    "common_erasure_pattern": "partner Berson died before Nobel Prize; she won but their joint contribution often framed as his"
+  },
+  {
+    "name": "Rita Levi-Montalcini",
+    "gender": "female",
+    "fields": [
+      "neuroscience",
+      "cell biology",
+      "developmental biology"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "nerve growth factor",
+      "NGF",
+      "neuronal development"
+    ],
+    "connected_people": [
+      "Stanley Cohen",
+      "Viktor Hamburger"
+    ],
+    "era": "1940s-1980s",
+    "nationality": "Italian",
+    "importance_weight": 0.91,
+    "common_erasure_pattern": "conducted research in hiding during WWII; shared Nobel with Cohen despite being primary discoverer of NGF"
+  },
+  {
+    "name": "Nora Stanton Blatch Barney",
+    "gender": "female",
+    "fields": [
+      "civil engineering",
+      "architecture"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "structural engineering",
+      "hydraulics",
+      "women in engineering"
+    ],
+    "connected_people": [
+      "Elizabeth Cady Stanton"
+    ],
+    "era": "1900s-1920s",
+    "nationality": "American",
+    "importance_weight": 0.78,
+    "common_erasure_pattern": "first woman to earn civil engineering degree in US; expelled from ASCE for being a woman"
+  },
+  {
+    "name": "Edith Clarke",
+    "gender": "female",
+    "fields": [
+      "electrical engineering",
+      "circuit analysis"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "Clarke calculator",
+      "power transmission",
+      "electrical circuit analysis"
+    ],
+    "connected_people": [
+      "Charles Steinmetz"
+    ],
+    "era": "1920s-1940s",
+    "nationality": "American",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": "first professionally employed female electrical engineer in US; rarely mentioned in engineering history"
+  },
+  {
+    "name": "Euphemia Lofton Haynes",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "education"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "mathematics education",
+      "DC public schools"
+    ],
+    "connected_people": [],
+    "era": "1930s-1950s",
+    "nationality": "American",
+    "importance_weight": 0.8,
+    "common_erasure_pattern": "first Black woman to earn PhD in mathematics; absent from most math history texts"
+  },
+  {
+    "name": "Gladys West",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "geodesy",
+      "computing"
+    ],
+    "contribution_type": "essential_contributor",
+    "connected_concepts": [
+      "GPS",
+      "satellite geodesy",
+      "geoid modeling",
+      "SEASAT"
+    ],
+    "connected_people": [
+      "Katherine Johnson"
+    ],
+    "era": "1960s-1990s",
+    "nationality": "American",
+    "importance_weight": 0.9,
+    "common_erasure_pattern": "programmed the mathematical model underlying GPS; absent from GPS invention narratives"
+  },
+  {
+    "name": "Annie Easley",
+    "gender": "female",
+    "fields": [
+      "computing",
+      "mathematics",
+      "aerospace"
+    ],
+    "contribution_type": "essential_contributor",
+    "connected_concepts": [
+      "Centaur rocket",
+      "battery technology",
+      "NASA computing",
+      "energy conversion"
+    ],
+    "connected_people": [
+      "Katherine Johnson",
+      "Dorothy Vaughan"
+    ],
+    "era": "1950s-1990s",
+    "nationality": "American",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": "NASA computer and coder; largely absent from space race history"
+  },
+  {
+    "name": "Lynn Margulis",
+    "gender": "female",
+    "fields": [
+      "evolutionary biology",
+      "cell biology",
+      "microbiology"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "endosymbiosis",
+      "mitochondria origin",
+      "chloroplast origin",
+      "symbiogenesis"
+    ],
+    "connected_people": [
+      "Carl Sagan",
+      "Ernst Mayr"
+    ],
+    "era": "1960s-2000s",
+    "nationality": "American",
+    "importance_weight": 0.93,
+    "common_erasure_pattern": "endosymbiotic theory rejected by mainstream for years; paper rejected 15 times; now fundamental biology"
+  },
+  {
+    "name": "Nettie Maria Stevens",
+    "gender": "female",
+    "fields": [
+      "genetics",
+      "embryology"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "sex chromosomes",
+      "XY system",
+      "mealworm chromosomes"
+    ],
+    "connected_people": [
+      "Edmund Wilson",
+      "Thomas Hunt Morgan"
+    ],
+    "era": "1900s",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "Wilson credited alongside her despite her clearer evidence; Morgan minimized her contribution"
+  },
+  {
+    "name": "Mary Anning",
+    "gender": "female",
+    "fields": [
+      "paleontology",
+      "geology",
+      "fossil hunting"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "ichthyosaur",
+      "plesiosaur",
+      "pterodactyl",
+      "Jurassic fossils",
+      "Lyme Regis"
+    ],
+    "connected_people": [
+      "William Buckland",
+      "Georges Cuvier",
+      "William Conybeare"
+    ],
+    "era": "1810s-1840s",
+    "nationality": "British",
+    "importance_weight": 0.91,
+    "common_erasure_pattern": "male geologists published her discoveries under their own names; barred from Geological Society"
+  },
+  {
+    "name": "Williamina Fleming",
+    "gender": "female",
+    "fields": [
+      "astronomy",
+      "stellar classification"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "stellar spectra",
+      "Harvard Classification",
+      "white dwarfs",
+      "Horsehead Nebula"
+    ],
+    "connected_people": [
+      "Edward Pickering",
+      "Annie Jump Cannon",
+      "Henrietta Swan Leavitt"
+    ],
+    "era": "1880s-1910s",
+    "nationality": "Scottish-American",
+    "importance_weight": 0.87,
+    "common_erasure_pattern": "Harvard Computers doing foundational astronomy work paid less than unskilled laborers; rarely named"
+  },
+  {
+    "name": "Henrietta Swan Leavitt",
+    "gender": "female",
+    "fields": [
+      "astronomy",
+      "astrophysics"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "Cepheid variable stars",
+      "period-luminosity relationship",
+      "cosmic distance ladder",
+      "galaxy distances"
+    ],
+    "connected_people": [
+      "Edward Pickering",
+      "Edwin Hubble",
+      "Williamina Fleming",
+      "Annie Jump Cannon"
+    ],
+    "era": "1900s-1920s",
+    "nationality": "American",
+    "importance_weight": 0.94,
+    "common_erasure_pattern": "Hubble used her method to measure universe's size without crediting her; nominated for Nobel posthumously (ineligible)"
+  },
+  {
+    "name": "Annie Jump Cannon",
+    "gender": "female",
+    "fields": [
+      "astronomy",
+      "stellar classification"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "OBAFGKM classification",
+      "Harvard spectral classification",
+      "stellar spectra catalog"
+    ],
+    "connected_people": [
+      "Edward Pickering",
+      "Williamina Fleming",
+      "Henrietta Swan Leavitt"
+    ],
+    "era": "1890s-1940s",
+    "nationality": "American",
+    "importance_weight": 0.9,
+    "common_erasure_pattern": "Harvard Computer; her classification system still used today but she is rarely taught"
+  },
+  {
+    "name": "Antonia Maury",
+    "gender": "female",
+    "fields": [
+      "astronomy",
+      "stellar spectroscopy"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "spectroscopic binaries",
+      "stellar luminosity classes",
+      "Harvard classification"
+    ],
+    "connected_people": [
+      "Ejnar Hertzsprung",
+      "Edward Pickering",
+      "Annie Jump Cannon"
+    ],
+    "era": "1890s-1930s",
+    "nationality": "American",
+    "importance_weight": 0.83,
+    "common_erasure_pattern": "Harvard Computer; her luminosity class work was key to Hertzsprung-Russell diagram, she is rarely credited"
+  },
+  {
+    "name": "Joanna Budwig",
+    "gender": "female",
+    "fields": [
+      "biochemistry",
+      "nutrition"
+    ],
+    "contribution_type": "researcher",
+    "connected_concepts": [
+      "fatty acids",
+      "chromatography",
+      "lipid research"
+    ],
+    "connected_people": [],
+    "era": "1950s-1970s",
+    "nationality": "German",
+    "importance_weight": 0.7,
+    "common_erasure_pattern": "contributions to lipid biochemistry underrepresented"
+  },
+  {
+    "name": "Stephanie Kwolek",
+    "gender": "female",
+    "fields": [
+      "chemistry",
+      "polymer chemistry",
+      "materials science"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "Kevlar",
+      "liquid crystal polymers",
+      "ballistic armor"
+    ],
+    "connected_people": [
+      "Herbert Blades"
+    ],
+    "era": "1960s-1970s",
+    "nationality": "American",
+    "importance_weight": 0.91,
+    "common_erasure_pattern": "Kevlar credited to DuPont as institution rather than her; underrepresented in materials science history"
+  },
+  {
+    "name": "Patricia Bath",
+    "gender": "female",
+    "fields": [
+      "ophthalmology",
+      "medicine",
+      "laser surgery"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "Laserphaco Probe",
+      "cataract treatment",
+      "community ophthalmology"
+    ],
+    "connected_people": [],
+    "era": "1980s-2000s",
+    "nationality": "American",
+    "importance_weight": 0.87,
+    "common_erasure_pattern": "first Black female doctor to receive medical patent; underrepresented in medical invention history"
+  },
+  {
+    "name": "Mae Jemison",
+    "gender": "female",
+    "fields": [
+      "medicine",
+      "aerospace",
+      "engineering"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "Space Shuttle Endeavour",
+      "first Black female astronaut",
+      "Peace Corps"
+    ],
+    "connected_people": [
+      "Sally Ride"
+    ],
+    "era": "1980s-1990s",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "often reduced to 'first Black female astronaut' without discussing her scientific work"
+  },
+  {
+    "name": "Chandra Prescod-Weinstein",
+    "gender": "female",
+    "fields": [
+      "cosmology",
+      "particle physics",
+      "dark matter"
+    ],
+    "contribution_type": "researcher",
+    "connected_concepts": [
+      "axions",
+      "dark matter",
+      "early universe cosmology"
+    ],
+    "connected_people": [],
+    "era": "2010s-present",
+    "nationality": "American",
+    "importance_weight": 0.78,
+    "common_erasure_pattern": "one of fewer than 100 Black women with physics PhD in US; underrepresented in cosmology narratives"
+  },
+  {
+    "name": "Flossie Wong-Staal",
+    "gender": "female",
+    "fields": [
+      "virology",
+      "molecular biology",
+      "HIV research"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "HIV genome cloning",
+      "HIV genetic mapping",
+      "retrovirus"
+    ],
+    "connected_people": [
+      "Robert Gallo",
+      "Françoise Barré-Sinoussi"
+    ],
+    "era": "1980s-2000s",
+    "nationality": "Chinese-American",
+    "importance_weight": 0.89,
+    "common_erasure_pattern": "first to clone HIV and map its genes; overshadowed by Gallo-Montagnier credit dispute"
+  },
+  {
+    "name": "Sau Lan Wu",
+    "gender": "female",
+    "fields": [
+      "particle physics",
+      "experimental physics"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "J/psi particle",
+      "gluon",
+      "Higgs boson evidence",
+      "charm quark"
+    ],
+    "connected_people": [
+      "Samuel Ting",
+      "Burton Richter"
+    ],
+    "era": "1970s-2010s",
+    "nationality": "Chinese-American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "contributed to three major particle physics discoveries; rarely named in textbooks"
+  },
+  {
+    "name": "Trotula of Salerno",
+    "gender": "female",
+    "fields": [
+      "medicine",
+      "gynecology",
+      "obstetrics"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "medieval gynecology",
+      "women's medicine",
+      "Salerno medical school"
+    ],
+    "connected_people": [],
+    "era": "1100s",
+    "nationality": "Italian",
+    "importance_weight": 0.8,
+    "common_erasure_pattern": "medieval medical authority; later scholars disputed she existed at all to erase her contributions"
+  },
+  {
+    "name": "Alice Evans",
+    "gender": "female",
+    "fields": [
+      "microbiology",
+      "bacteriology",
+      "food safety"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "brucellosis",
+      "milk pasteurization",
+      "Brucella bacteria"
+    ],
+    "connected_people": [
+      "Theobald Smith"
+    ],
+    "era": "1910s-1940s",
+    "nationality": "American",
+    "importance_weight": 0.84,
+    "common_erasure_pattern": "findings dismissed for years because she lacked PhD; pasteurization now saves millions"
+  },
+  {
+    "name": "Maud Menten",
+    "gender": "female",
+    "fields": [
+      "biochemistry",
+      "enzymology",
+      "pathology"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "Michaelis-Menten kinetics",
+      "enzyme kinetics",
+      "azo dye coupling"
+    ],
+    "connected_people": [
+      "Leonor Michaelis"
+    ],
+    "era": "1910s-1950s",
+    "nationality": "Canadian",
+    "importance_weight": 0.89,
+    "common_erasure_pattern": "Michaelis-Menten equation named in right order but she is rarely discussed as the Menten"
+  },
+  {
+    "name": "Hilde Mangold",
+    "gender": "female",
+    "fields": [
+      "developmental biology",
+      "embryology"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "organizer region",
+      "embryonic induction",
+      "Spemann-Mangold organizer"
+    ],
+    "connected_people": [
+      "Hans Spemann"
+    ],
+    "era": "1920s",
+    "nationality": "German",
+    "importance_weight": 0.87,
+    "common_erasure_pattern": "died at 26; Spemann won Nobel for their joint discovery while she was excluded (posthumously ineligible)"
+  },
+  {
+    "name": "Nora Ephron",
+    "gender": "female",
+    "fields": [
+      "journalism",
+      "film",
+      "literature"
+    ],
+    "contribution_type": "creator",
+    "connected_concepts": [
+      "screenwriting",
+      "feminist journalism",
+      "personal essay"
+    ],
+    "connected_people": [],
+    "era": "1970s-2000s",
+    "nationality": "American",
+    "importance_weight": 0.75,
+    "common_erasure_pattern": "female directors and writers systematically underrepresented in film history"
+  },
+  {
+    "name": "Claudia Jones",
+    "gender": "female",
+    "fields": [
+      "political activism",
+      "journalism",
+      "Black feminism"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "triple oppression theory",
+      "Notting Hill Carnival",
+      "West Indian Gazette",
+      "Black feminism"
+    ],
+    "connected_people": [
+      "Paul Robeson",
+      "W.E.B. Du Bois"
+    ],
+    "era": "1940s-1960s",
+    "nationality": "Trinidadian-British",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": "foundational Black feminist theorist; deported from US; largely erased from civil rights and feminist histories"
+  },
+  {
+    "name": "Ida B. Wells",
+    "gender": "female",
+    "fields": [
+      "journalism",
+      "civil rights",
+      "sociology"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "anti-lynching campaign",
+      "investigative journalism",
+      "NAACP",
+      "suffrage"
+    ],
+    "connected_people": [
+      "Frederick Douglass",
+      "W.E.B. Du Bois",
+      "Susan B. Anthony"
+    ],
+    "era": "1880s-1930s",
+    "nationality": "American",
+    "importance_weight": 0.93,
+    "common_erasure_pattern": "co-founded NAACP but erased from its founding narrative; suffrage movement excluded her"
+  },
+  {
+    "name": "Sojourner Truth",
+    "gender": "female",
+    "fields": [
+      "abolitionism",
+      "civil rights",
+      "women's rights"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "Ain't I a Woman",
+      "abolitionism",
+      "women's suffrage",
+      "Underground Railroad"
+    ],
+    "connected_people": [
+      "Frederick Douglass",
+      "Harriet Beecher Stowe"
+    ],
+    "era": "1840s-1880s",
+    "nationality": "American",
+    "importance_weight": 0.91,
+    "common_erasure_pattern": "intersectional activism between race and gender erased; reduced to single speech"
+  },
+  {
+    "name": "Harriet Tubman",
+    "gender": "female",
+    "fields": [
+      "abolitionism",
+      "military strategy",
+      "civil rights"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "Underground Railroad",
+      "Civil War espionage",
+      "Combahee River Raid",
+      "women's suffrage"
+    ],
+    "connected_people": [
+      "Frederick Douglass",
+      "William Still",
+      "John Brown"
+    ],
+    "era": "1840s-1910s",
+    "nationality": "American",
+    "importance_weight": 0.95,
+    "common_erasure_pattern": "military and intelligence role almost entirely omitted from history books; only Underground Railroad mentioned"
+  },
+  {
+    "name": "Zitkala-Ša",
+    "gender": "female",
+    "fields": [
+      "literature",
+      "music",
+      "Native American rights"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "Native American civil rights",
+      "American Indian Stories",
+      "SAI",
+      "opera"
+    ],
+    "connected_people": [
+      "Carlos Montezuma"
+    ],
+    "era": "1890s-1930s",
+    "nationality": "Lakota Sioux-American",
+    "importance_weight": 0.83,
+    "common_erasure_pattern": "Native American activist and writer; largely absent from American literature and civil rights curricula"
+  },
+  {
+    "name": "Dolores Huerta",
+    "gender": "female",
+    "fields": [
+      "labor rights",
+      "civil rights",
+      "feminism"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "farmworker rights",
+      "UFW",
+      "Chicano movement",
+      "labor organizing"
+    ],
+    "connected_people": [
+      "Cesar Chavez"
+    ],
+    "era": "1960s-present",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "co-founded UFW with Chavez; he receives most of the credit in textbooks"
+  },
+  {
+    "name": "Shirley Chisholm",
+    "gender": "female",
+    "fields": [
+      "politics",
+      "education",
+      "civil rights"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "first Black congresswoman",
+      "1972 presidential campaign",
+      "WIC program",
+      "education policy"
+    ],
+    "connected_people": [
+      "Jesse Jackson",
+      "Bella Abzug"
+    ],
+    "era": "1960s-1980s",
+    "nationality": "American",
+    "importance_weight": 0.9,
+    "common_erasure_pattern": "first Black woman to run for major party presidential nomination; often omitted from political history"
+  },
+  {
+    "name": "Fannie Lou Hamer",
+    "gender": "female",
+    "fields": [
+      "civil rights",
+      "voting rights",
+      "politics"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "Mississippi Freedom Democratic Party",
+      "Voting Rights Act",
+      "sharecropper activism"
+    ],
+    "connected_people": [
+      "Medgar Evers",
+      "Bob Moses",
+      "Stokely Carmichael"
+    ],
+    "era": "1960s-1970s",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "crucial voting rights organizer; her 1964 DNC testimony that changed policy is rarely taught"
+  },
+  {
+    "name": "Mary McLeod Bethune",
+    "gender": "female",
+    "fields": [
+      "education",
+      "civil rights",
+      "politics"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "HBCU founding",
+      "National Council of Negro Women",
+      "Roosevelt's Black Cabinet"
+    ],
+    "connected_people": [
+      "Eleanor Roosevelt",
+      "Franklin Roosevelt"
+    ],
+    "era": "1900s-1950s",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "founded a university; advised FDR; largely absent from New Deal and civil rights histories"
+  },
+  {
+    "name": "Pauli Murray",
+    "gender": "female",
+    "fields": [
+      "law",
+      "civil rights",
+      "theology",
+      "feminism"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "Jane Crow",
+      "intersectionality precursor",
+      "Ruth Bader Ginsburg influence",
+      "civil rights law"
+    ],
+    "connected_people": [
+      "Ruth Bader Ginsburg",
+      "Thurgood Marshall",
+      "Eleanor Roosevelt"
+    ],
+    "era": "1940s-1980s",
+    "nationality": "American",
+    "importance_weight": 0.89,
+    "common_erasure_pattern": "legal arguments used by RBG and Thurgood Marshall without credit; first Black woman Episcopal priest"
+  },
+  {
+    "name": "Angela Davis",
+    "gender": "female",
+    "fields": [
+      "philosophy",
+      "activism",
+      "political theory"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "prison abolition",
+      "Black feminism",
+      "communist party",
+      "women race and class"
+    ],
+    "connected_people": [
+      "George Jackson",
+      "Herbert Marcuse"
+    ],
+    "era": "1960s-present",
+    "nationality": "American",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": "philosophical and theoretical contributions often reduced to her 1970 arrest narrative"
+  },
+  {
+    "name": "bell hooks",
+    "gender": "female",
+    "fields": [
+      "feminist theory",
+      "cultural criticism",
+      "education"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "intersectionality",
+      "feminist theory",
+      "engaged pedagogy",
+      "white supremacist capitalist patriarchy"
+    ],
+    "connected_people": [
+      "Angela Davis",
+      "Cornel West",
+      "Paulo Freire"
+    ],
+    "era": "1980s-2020s",
+    "nationality": "American",
+    "importance_weight": 0.87,
+    "common_erasure_pattern": "foundational feminist theorist underrepresented in mainstream curricula"
+  },
+  {
+    "name": "Audre Lorde",
+    "gender": "female",
+    "fields": [
+      "poetry",
+      "feminist theory",
+      "civil rights"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "intersectionality",
+      "difference and power",
+      "biomythography",
+      "Black feminism"
+    ],
+    "connected_people": [
+      "Adrienne Rich",
+      "Angela Davis",
+      "bell hooks"
+    ],
+    "era": "1960s-1990s",
+    "nationality": "American",
+    "importance_weight": 0.87,
+    "common_erasure_pattern": "foundational intersectional feminist; underrepresented in literary and political theory curricula"
+  },
+  {
+    "name": "Kimberlé Crenshaw",
+    "gender": "female",
+    "fields": [
+      "law",
+      "feminist theory",
+      "critical race theory"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "intersectionality",
+      "critical race theory",
+      "anti-discrimination law"
+    ],
+    "connected_people": [
+      "bell hooks",
+      "Audre Lorde",
+      "Angela Davis"
+    ],
+    "era": "1980s-present",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "coined intersectionality; the term is widely used without attribution to her"
+  },
+  {
+    "name": "Wangari Maathai",
+    "gender": "female",
+    "fields": [
+      "environmental science",
+      "civil rights",
+      "politics"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "Green Belt Movement",
+      "reforestation",
+      "women's rights Kenya",
+      "Nobel Peace Prize"
+    ],
+    "connected_people": [],
+    "era": "1970s-2000s",
+    "nationality": "Kenyan",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "first African woman to win Nobel Peace Prize; environmental contributions framed as activism not science"
+  },
+  {
+    "name": "Vandana Shiva",
+    "gender": "female",
+    "fields": [
+      "environmental science",
+      "food sovereignty",
+      "physics"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "seed sovereignty",
+      "biodiversity",
+      "ecofeminism",
+      "Chipko movement"
+    ],
+    "connected_people": [
+      "Wangari Maathai"
+    ],
+    "era": "1980s-present",
+    "nationality": "Indian",
+    "importance_weight": 0.83,
+    "common_erasure_pattern": "physicist turned environmental activist; scientific background underemphasized"
+  },
+  {
+    "name": "Amartya Sen",
+    "gender": "male",
+    "fields": [
+      "economics",
+      "philosophy",
+      "development economics"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "capability approach",
+      "social choice theory",
+      "famines",
+      "human development"
+    ],
+    "connected_people": [
+      "Martha Nussbaum",
+      "Kenneth Arrow"
+    ],
+    "era": "1970s-present",
+    "nationality": "Indian",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "included for comparison — female economists like Elinor Ostrom often less taught despite Nobel"
+  },
+  {
+    "name": "Elinor Ostrom",
+    "gender": "female",
+    "fields": [
+      "economics",
+      "political science",
+      "governance"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "commons governance",
+      "collective action",
+      "polycentric systems",
+      "tragedy of the commons refutation"
+    ],
+    "connected_people": [
+      "Vincent Ostrom",
+      "Amartya Sen"
+    ],
+    "era": "1970s-2010s",
+    "nationality": "American",
+    "importance_weight": 0.91,
+    "common_erasure_pattern": "first woman to win Nobel in Economics; work on commons underrepresented in economics curricula"
+  },
+  {
+    "name": "Joan Robinson",
+    "gender": "female",
+    "fields": [
+      "economics",
+      "macroeconomics",
+      "development economics"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "imperfect competition",
+      "post-Keynesian economics",
+      "capital theory",
+      "accumulation of capital"
+    ],
+    "connected_people": [
+      "John Maynard Keynes",
+      "Piero Sraffa",
+      "Michal Kalecki"
+    ],
+    "era": "1930s-1970s",
+    "nationality": "British",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "one of the most important economists of 20th century; widely considered wrongly excluded from Nobel"
+  },
+  {
+    "name": "Anna Schwartz",
+    "gender": "female",
+    "fields": [
+      "economics",
+      "monetary economics",
+      "economic history"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "monetary history of US",
+      "Great Depression causes",
+      "monetarism"
+    ],
+    "connected_people": [
+      "Milton Friedman"
+    ],
+    "era": "1950s-2000s",
+    "nationality": "American",
+    "importance_weight": 0.86,
+    "common_erasure_pattern": "co-authored landmark monetary history with Friedman; he won Nobel, she is often footnoted"
+  },
+  {
+    "name": "Claudia Goldin",
+    "gender": "female",
+    "fields": [
+      "economics",
+      "labor economics",
+      "gender economics"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "gender pay gap",
+      "women's labor force participation",
+      "greedy jobs"
+    ],
+    "connected_people": [
+      "Lawrence Katz"
+    ],
+    "era": "1980s-present",
+    "nationality": "American",
+    "importance_weight": 0.89,
+    "common_erasure_pattern": "won Nobel in Economics 2023; work on gender pay gap underrepresented before prize"
+  },
+  {
+    "name": "Mary Wollstonecraft",
+    "gender": "female",
+    "fields": [
+      "philosophy",
+      "feminism",
+      "political theory"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "Vindication of the Rights of Woman",
+      "liberal feminism",
+      "education equality",
+      "Enlightenment"
+    ],
+    "connected_people": [
+      "William Godwin",
+      "Thomas Paine",
+      "Jean-Jacques Rousseau"
+    ],
+    "era": "1780s-1790s",
+    "nationality": "British",
+    "importance_weight": 0.91,
+    "common_erasure_pattern": "foundational feminist philosopher; personal life used to discredit her political philosophy"
+  },
+  {
+    "name": "Simone de Beauvoir",
+    "gender": "female",
+    "fields": [
+      "philosophy",
+      "feminism",
+      "existentialism"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "The Second Sex",
+      "existentialist feminism",
+      "gender as social construct",
+      "otherness"
+    ],
+    "connected_people": [
+      "Jean-Paul Sartre",
+      "Albert Camus"
+    ],
+    "era": "1940s-1970s",
+    "nationality": "French",
+    "importance_weight": 0.92,
+    "common_erasure_pattern": "framed as Sartre's companion rather than original philosopher in her own right"
+  },
+  {
+    "name": "Hannah Arendt",
+    "gender": "female",
+    "fields": [
+      "philosophy",
+      "political theory",
+      "history"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "banality of evil",
+      "totalitarianism",
+      "The Human Condition",
+      "Eichmann trial"
+    ],
+    "connected_people": [
+      "Martin Heidegger",
+      "Karl Jaspers",
+      "Walter Benjamin"
+    ],
+    "era": "1940s-1970s",
+    "nationality": "German-American",
+    "importance_weight": 0.91,
+    "common_erasure_pattern": "relationship with Heidegger used to overshadow her independent philosophical contributions"
+  },
+  {
+    "name": "Hypatia",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "astronomy",
+      "philosophy"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "Neoplatonism",
+      "conic sections",
+      "astrolabe design",
+      "Greek mathematics"
+    ],
+    "connected_people": [
+      "Theon of Alexandria",
+      "Synesius of Cyrene"
+    ],
+    "era": "350-415 CE",
+    "nationality": "Egyptian",
+    "importance_weight": 0.87,
+    "common_erasure_pattern": "murder by Christian mob emphasized over her mathematical and astronomical scholarship"
+  },
+  {
+    "name": "Émilie du Châtelet",
+    "gender": "female",
+    "fields": [
+      "physics",
+      "mathematics",
+      "philosophy of science"
+    ],
+    "contribution_type": "translator_and_scholar",
+    "connected_concepts": [
+      "Newtonian mechanics",
+      "kinetic energy",
+      "Leibniz",
+      "Newton's Principia translation"
+    ],
+    "connected_people": [
+      "Voltaire",
+      "Isaac Newton",
+      "Gottfried Leibniz"
+    ],
+    "era": "1730s-1740s",
+    "nationality": "French",
+    "importance_weight": 0.9,
+    "common_erasure_pattern": "framed as Voltaire's companion; her original contributions to physics and conservation of energy erased"
+  },
+  {
+    "name": "Laura Bassi",
+    "gender": "female",
+    "fields": [
+      "physics",
+      "experimental philosophy",
+      "Newtonian mechanics"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "Newtonianism",
+      "electricity",
+      "experimental physics",
+      "Bologna university"
+    ],
+    "connected_people": [
+      "Voltaire",
+      "Benjamin Franklin"
+    ],
+    "era": "1730s-1770s",
+    "nationality": "Italian",
+    "importance_weight": 0.84,
+    "common_erasure_pattern": "first woman to earn university chair in science; almost entirely absent from physics history"
+  },
+  {
+    "name": "Mária Telkes",
+    "gender": "female",
+    "fields": [
+      "solar energy",
+      "materials science",
+      "engineering"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "solar energy storage",
+      "thermoelectric devices",
+      "solar house",
+      "phase change materials"
+    ],
+    "connected_people": [
+      "Eleanor Raymond"
+    ],
+    "era": "1940s-1970s",
+    "nationality": "Hungarian-American",
+    "importance_weight": 0.86,
+    "common_erasure_pattern": "Sun Queen whose solar energy work predates modern solar panels; absent from energy history"
+  },
+  {
+    "name": "Inge Lehmann",
+    "gender": "female",
+    "fields": [
+      "seismology",
+      "geophysics"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "Earth's inner core",
+      "seismic waves",
+      "P-wave discontinuity"
+    ],
+    "connected_people": [
+      "Beno Gutenberg",
+      "Charles Richter"
+    ],
+    "era": "1930s-1960s",
+    "nationality": "Danish",
+    "importance_weight": 0.91,
+    "common_erasure_pattern": "discovered Earth has a solid inner core; almost entirely absent from Earth science textbooks"
+  },
+  {
+    "name": "Maria Sibylla Merian",
+    "gender": "female",
+    "fields": [
+      "entomology",
+      "botany",
+      "natural history"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "metamorphosis",
+      "insect life cycles",
+      "Suriname biodiversity",
+      "scientific illustration"
+    ],
+    "connected_people": [
+      "Carl Linnaeus"
+    ],
+    "era": "1670s-1710s",
+    "nationality": "German-Dutch",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "disproved spontaneous generation for insects; foundational to entomology but rarely taught"
+  },
+  {
+    "name": "Alice Catherine Evans",
+    "gender": "female",
+    "fields": [
+      "bacteriology",
+      "food science",
+      "public health"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "Brucella",
+      "brucellosis",
+      "milk pasteurization",
+      "bovine tuberculosis"
+    ],
+    "connected_people": [
+      "Theobald Smith"
+    ],
+    "era": "1910s-1940s",
+    "nationality": "American",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": "male scientists rejected her findings for a decade because she had no PhD and was a woman"
+  },
+  {
+    "name": "Sophie Germain",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "number theory",
+      "elasticity"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "Fermat's Last Theorem",
+      "Sophie Germain primes",
+      "vibrating plates",
+      "elasticity theory"
+    ],
+    "connected_people": [
+      "Carl Friedrich Gauss",
+      "Adrien-Marie Legendre"
+    ],
+    "era": "1800s-1830s",
+    "nationality": "French",
+    "importance_weight": 0.91,
+    "common_erasure_pattern": "used male pseudonym for years; her elasticity theory foundational to modern engineering"
+  },
+  {
+    "name": "Olga Ladyzhenskaya",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "fluid dynamics",
+      "partial differential equations"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "Navier-Stokes equations",
+      "fluid dynamics",
+      "functional analysis"
+    ],
+    "connected_people": [
+      "Sergei Sobolev"
+    ],
+    "era": "1950s-1990s",
+    "nationality": "Russian",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "one of the greatest mathematicians of 20th century; almost entirely absent from math curricula"
+  },
+  {
+    "name": "Julia Robinson",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "logic",
+      "computability"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "Hilbert's tenth problem",
+      "decision problems",
+      "recursive functions",
+      "Diophantine equations"
+    ],
+    "connected_people": [
+      "Yuri Matiyasevich",
+      "Martin Davis",
+      "Hilary Putnam"
+    ],
+    "era": "1940s-1980s",
+    "nationality": "American",
+    "importance_weight": 0.89,
+    "common_erasure_pattern": "foundational work on Hilbert's tenth problem; Matiyasevich who completed the proof often solely credited"
+  },
+  {
+    "name": "Mary Cartwright",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "chaos theory",
+      "radio engineering"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "chaos theory",
+      "van der Pol oscillator",
+      "nonlinear dynamics",
+      "radio wave behavior"
+    ],
+    "connected_people": [
+      "John Littlewood",
+      "G.H. Hardy"
+    ],
+    "era": "1940s-1970s",
+    "nationality": "British",
+    "importance_weight": 0.87,
+    "common_erasure_pattern": "foundational work on chaos theory predates Lorenz; almost never mentioned in chaos theory history"
+  },
+  {
+    "name": "Mina Rees",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "computing",
+      "science policy"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "NSF computing programs",
+      "DARPA precursor funding",
+      "applied mathematics"
+    ],
+    "connected_people": [
+      "John von Neumann",
+      "Norbert Wiener"
+    ],
+    "era": "1940s-1970s",
+    "nationality": "American",
+    "importance_weight": 0.83,
+    "common_erasure_pattern": "shaped US government computing and mathematics funding post-WWII; absent from tech history"
+  },
+  {
+    "name": "Frances Allen",
+    "gender": "female",
+    "fields": [
+      "computing",
+      "compiler optimization",
+      "parallel computing"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "compiler optimization",
+      "parallel computing",
+      "FORTRAN",
+      "program flow analysis"
+    ],
+    "connected_people": [
+      "John Cocke"
+    ],
+    "era": "1960s-2000s",
+    "nationality": "American",
+    "importance_weight": 0.87,
+    "common_erasure_pattern": "first woman to win Turing Award; underrepresented in computing history"
+  },
+  {
+    "name": "Jean Bartik",
+    "gender": "female",
+    "fields": [
+      "computing",
+      "programming",
+      "ENIAC"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "ENIAC programming",
+      "stored program concept",
+      "BINAC",
+      "UNIVAC"
+    ],
+    "connected_people": [
+      "John Mauchly",
+      "J. Presper Eckert",
+      "Frances Bilas Spence"
+    ],
+    "era": "1940s-1950s",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "ENIAC programmers were women; they were excluded from the computer's dedication photo and histories"
+  },
+  {
+    "name": "Frances Bilas Spence",
+    "gender": "female",
+    "fields": [
+      "computing",
+      "mathematics",
+      "ENIAC"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "ENIAC programming",
+      "ballistics calculations",
+      "early computing"
+    ],
+    "connected_people": [
+      "Jean Bartik",
+      "John Mauchly"
+    ],
+    "era": "1940s-1950s",
+    "nationality": "American",
+    "importance_weight": 0.84,
+    "common_erasure_pattern": "ENIAC programmers erased from computing history; mistaken for models in famous photo"
+  },
+  {
+    "name": "Kathleen Booth",
+    "gender": "female",
+    "fields": [
+      "computing",
+      "programming languages",
+      "assembly language"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "assembly language",
+      "ARC computer",
+      "programming language design"
+    ],
+    "connected_people": [
+      "Andrew Booth"
+    ],
+    "era": "1940s-1960s",
+    "nationality": "British",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": "invented assembly language; almost entirely absent from programming language history"
+  },
+  {
+    "name": "Mary Kenneth Keller",
+    "gender": "female",
+    "fields": [
+      "computing",
+      "programming languages",
+      "education"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "BASIC programming language",
+      "computer science education",
+      "AI"
+    ],
+    "connected_people": [
+      "John Kemeny",
+      "Thomas Kurtz"
+    ],
+    "era": "1960s-1980s",
+    "nationality": "American",
+    "importance_weight": 0.83,
+    "common_erasure_pattern": "co-developed BASIC; first woman to earn PhD in computer science in US; rarely mentioned"
+  },
+  {
+    "name": "Valerie Thomas",
+    "gender": "female",
+    "fields": [
+      "physics",
+      "imaging technology",
+      "computing"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "illusion transmitter",
+      "3D imaging",
+      "NASA Landsat",
+      "real-time image processing"
+    ],
+    "connected_people": [],
+    "era": "1970s-1990s",
+    "nationality": "American",
+    "importance_weight": 0.82,
+    "common_erasure_pattern": "invented 3D illusion technology used in modern medical imaging; absent from invention histories"
+  },
+  {
+    "name": "Mildred Dresselhaus",
+    "gender": "female",
+    "fields": [
+      "materials science",
+      "physics",
+      "carbon nanomaterials"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "carbon nanotubes",
+      "graphite intercalation",
+      "phonon physics",
+      "thermoelectric materials"
+    ],
+    "connected_people": [
+      "Richard Smalley",
+      "Harold Dresselhaus"
+    ],
+    "era": "1960s-2010s",
+    "nationality": "American",
+    "importance_weight": 0.91,
+    "common_erasure_pattern": "Queen of Carbon; foundational to carbon nanotube research; underrepresented in materials science history"
+  },
+  {
+    "name": "Har Gobind Khorana",
+    "gender": "male",
+    "fields": [
+      "biochemistry",
+      "genetics"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "genetic code",
+      "nucleotide synthesis"
+    ],
+    "connected_people": [
+      "Marshall Nirenberg",
+      "Robert Holley"
+    ],
+    "era": "1960s",
+    "nationality": "Indian-American",
+    "importance_weight": 0.8,
+    "common_erasure_pattern": "included for cross-reference — women contributors to genetic code research erased"
+  },
+  {
+    "name": "Martha Chase",
+    "gender": "female",
+    "fields": [
+      "genetics",
+      "molecular biology",
+      "bacteriology"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "Hershey-Chase experiment",
+      "DNA as genetic material",
+      "bacteriophage",
+      "protein vs DNA"
+    ],
+    "connected_people": [
+      "Alfred Hershey"
+    ],
+    "era": "1950s",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "Hershey won Nobel for their joint experiment; Chase not included despite equal contribution"
+  },
+  {
+    "name": "Nora Watteville",
+    "gender": "female",
+    "fields": [
+      "medicine",
+      "endocrinology"
+    ],
+    "contribution_type": "researcher",
+    "connected_concepts": [
+      "hormone research",
+      "reproductive endocrinology"
+    ],
+    "connected_people": [],
+    "era": "1940s-1960s",
+    "nationality": "Swiss",
+    "importance_weight": 0.7,
+    "common_erasure_pattern": "women endocrinologists systematically underrepresented"
+  },
+  {
+    "name": "Gertrude Belle Elion",
+    "gender": "female",
+    "fields": [
+      "pharmacology",
+      "biochemistry",
+      "drug design"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "rational drug design",
+      "AZT precursor",
+      "leukemia treatment",
+      "herpes treatment",
+      "organ transplant drugs"
+    ],
+    "connected_people": [
+      "George Hitchings"
+    ],
+    "era": "1940s-1980s",
+    "nationality": "American",
+    "importance_weight": 0.93,
+    "common_erasure_pattern": "developed drugs saving millions; had no PhD; work initially dismissed; won Nobel 1988"
+  },
+  {
+    "name": "Virginia Apgar",
+    "gender": "female",
+    "fields": [
+      "medicine",
+      "anesthesiology",
+      "neonatology"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "Apgar score",
+      "newborn assessment",
+      "neonatal care"
+    ],
+    "connected_people": [],
+    "era": "1950s",
+    "nationality": "American",
+    "importance_weight": 0.89,
+    "common_erasure_pattern": "Apgar score used billions of times; she is rarely taught in medical history"
+  },
+  {
+    "name": "Helen Taussig",
+    "gender": "female",
+    "fields": [
+      "medicine",
+      "cardiology",
+      "pediatrics"
+    ],
+    "contribution_type": "co-inventor",
+    "connected_concepts": [
+      "blue baby syndrome",
+      "Blalock-Taussig shunt",
+      "congenital heart disease",
+      "thalidomide ban"
+    ],
+    "connected_people": [
+      "Alfred Blalock",
+      "Vivien Thomas"
+    ],
+    "era": "1940s-1960s",
+    "nationality": "American",
+    "importance_weight": 0.9,
+    "common_erasure_pattern": "surgical technique named Blalock-Taussig but Blalock consistently receives primary credit"
+  },
+  {
+    "name": "Cecile Huggins",
+    "gender": "female",
+    "fields": [
+      "oncology",
+      "endocrinology"
+    ],
+    "contribution_type": "researcher",
+    "connected_concepts": [
+      "hormone therapy for cancer",
+      "prostate cancer"
+    ],
+    "connected_people": [
+      "Charles Huggins"
+    ],
+    "era": "1940s-1960s",
+    "nationality": "American",
+    "importance_weight": 0.72,
+    "common_erasure_pattern": "women cancer researchers systematically underrepresented"
+  },
+  {
+    "name": "Sara Josephine Baker",
+    "gender": "female",
+    "fields": [
+      "public health",
+      "medicine",
+      "pediatrics"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "infant mortality reduction",
+      "NYC Department of Child Hygiene",
+      "Typhoid Mary",
+      "school nursing"
+    ],
+    "connected_people": [
+      "Mary Mallon"
+    ],
+    "era": "1900s-1920s",
+    "nationality": "American",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": "reduced NYC infant mortality dramatically; absent from public health history"
+  },
+  {
+    "name": "Rebecca Lee Crumpler",
+    "gender": "female",
+    "fields": [
+      "medicine",
+      "public health"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "first Black female physician in US",
+      "Book of Medical Discourses",
+      "Reconstruction medicine"
+    ],
+    "connected_people": [],
+    "era": "1860s-1880s",
+    "nationality": "American",
+    "importance_weight": 0.84,
+    "common_erasure_pattern": "first Black woman to earn MD in US; almost entirely absent from medical history curricula"
+  },
+  {
+    "name": "Anna Julia Cooper",
+    "gender": "female",
+    "fields": [
+      "education",
+      "sociology",
+      "Black feminism"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "intersectionality precursor",
+      "A Voice from the South",
+      "Black women's intellectual tradition"
+    ],
+    "connected_people": [
+      "W.E.B. Du Bois",
+      "Frederick Douglass"
+    ],
+    "era": "1880s-1950s",
+    "nationality": "American",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": "foundational Black feminist intellectual; rarely taught alongside male contemporaries like Du Bois"
+  },
+  {
+    "name": "Septima Poinsette Clark",
+    "gender": "female",
+    "fields": [
+      "education",
+      "civil rights"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "Citizenship Schools",
+      "voter literacy",
+      "Southern Christian Leadership Conference",
+      "MLK"
+    ],
+    "connected_people": [
+      "Martin Luther King Jr.",
+      "Ella Baker",
+      "Rosa Parks"
+    ],
+    "era": "1950s-1970s",
+    "nationality": "American",
+    "importance_weight": 0.84,
+    "common_erasure_pattern": "MLK called her 'mother of the movement'; almost entirely absent from civil rights curricula"
+  },
+  {
+    "name": "Ella Baker",
+    "gender": "female",
+    "fields": [
+      "civil rights",
+      "community organizing"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "SNCC founding",
+      "participatory democracy",
+      "NAACP",
+      "grassroots organizing"
+    ],
+    "connected_people": [
+      "Martin Luther King Jr.",
+      "Stokely Carmichael",
+      "Fannie Lou Hamer"
+    ],
+    "era": "1940s-1970s",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "founded SNCC; her organizing philosophy shaped civil rights movement but she is rarely taught"
+  },
+  {
+    "name": "Rosa Parks",
+    "gender": "female",
+    "fields": [
+      "civil rights",
+      "activism"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "Montgomery Bus Boycott",
+      "NAACP",
+      "civil rights movement"
+    ],
+    "connected_people": [
+      "Martin Luther King Jr.",
+      "E.D. Nixon",
+      "Jo Ann Robinson"
+    ],
+    "era": "1950s-1960s",
+    "nationality": "American",
+    "importance_weight": 0.9,
+    "common_erasure_pattern": "reduced to 'tired seamstress' narrative; her decades of NAACP activism and strategic role erased"
+  },
+  {
+    "name": "Jo Ann Robinson",
+    "gender": "female",
+    "fields": [
+      "civil rights",
+      "education"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "Montgomery Bus Boycott organization",
+      "WPC",
+      "civil rights strategy"
+    ],
+    "connected_people": [
+      "Rosa Parks",
+      "Martin Luther King Jr."
+    ],
+    "era": "1950s",
+    "nationality": "American",
+    "importance_weight": 0.82,
+    "common_erasure_pattern": "actually organized the Montgomery Bus Boycott leafleting overnight; rarely mentioned"
+  },
+  {
+    "name": "Claudette Colvin",
+    "gender": "female",
+    "fields": [
+      "civil rights"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "bus segregation protest",
+      "Browder v. Gayle",
+      "Montgomery"
+    ],
+    "connected_people": [
+      "Rosa Parks",
+      "Fred Gray"
+    ],
+    "era": "1950s",
+    "nationality": "American",
+    "importance_weight": 0.8,
+    "common_erasure_pattern": "refused to give up her bus seat 9 months before Rosa Parks; deliberately erased from the narrative"
+  },
+  {
+    "name": "Constance Baker Motley",
+    "gender": "female",
+    "fields": [
+      "law",
+      "civil rights",
+      "politics"
+    ],
+    "contribution_type": "pioneer",
+    "connected_concepts": [
+      "NAACP Legal Defense Fund",
+      "James Meredith case",
+      "first Black female federal judge"
+    ],
+    "connected_people": [
+      "Thurgood Marshall",
+      "James Meredith"
+    ],
+    "era": "1950s-1980s",
+    "nationality": "American",
+    "importance_weight": 0.84,
+    "common_erasure_pattern": "argued ten civil rights cases before Supreme Court; almost entirely absent from legal history curricula"
+  },
+  {
+    "name": "Diane Nash",
+    "gender": "female",
+    "fields": [
+      "civil rights",
+      "nonviolent strategy"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "Nashville sit-ins",
+      "Freedom Rides",
+      "SNCC",
+      "Selma to Montgomery"
+    ],
+    "connected_people": [
+      "Martin Luther King Jr.",
+      "James Lawson",
+      "John Lewis"
+    ],
+    "era": "1960s",
+    "nationality": "American",
+    "importance_weight": 0.86,
+    "common_erasure_pattern": "strategic architect of key civil rights campaigns; nearly absent from civil rights movement history"
+  },
+  {
+    "name": "Ynes Mexia",
+    "gender": "female",
+    "fields": [
+      "botany",
+      "field biology",
+      "natural history"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "Amazonian plant specimens",
+      "Mexican flora",
+      "150,000 plant specimens"
+    ],
+    "connected_people": [
+      "Alice Eastwood"
+    ],
+    "era": "1920s-1930s",
+    "nationality": "Mexican-American",
+    "importance_weight": 0.82,
+    "common_erasure_pattern": "collected 150,000 specimens; discovered 500 new species; absent from botany history"
+  },
+  {
+    "name": "Dian Fossey",
+    "gender": "female",
+    "fields": [
+      "primatology",
+      "conservation biology",
+      "zoology"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "mountain gorilla behavior",
+      "gorilla conservation",
+      "Karisoke Research Center"
+    ],
+    "connected_people": [
+      "Louis Leakey",
+      "Jane Goodall"
+    ],
+    "era": "1960s-1980s",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "murder overshadows her scientific contributions to primatology and conservation"
+  },
+  {
+    "name": "Jane Goodall",
+    "gender": "female",
+    "fields": [
+      "primatology",
+      "ethology",
+      "conservation"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "chimpanzee tool use",
+      "chimpanzee social behavior",
+      "Gombe Stream",
+      "animal cognition"
+    ],
+    "connected_people": [
+      "Louis Leakey",
+      "Dian Fossey",
+      "Biruté Galdikas"
+    ],
+    "era": "1960s-present",
+    "nationality": "British",
+    "importance_weight": 0.92,
+    "common_erasure_pattern": "scientific methodology dismissed early on because she lacked formal degree and named her subjects"
+  },
+  {
+    "name": "Biruté Galdikas",
+    "gender": "female",
+    "fields": [
+      "primatology",
+      "anthropology",
+      "conservation"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "orangutan behavior",
+      "Borneo conservation",
+      "Camp Leakey"
+    ],
+    "connected_people": [
+      "Louis Leakey",
+      "Jane Goodall",
+      "Dian Fossey"
+    ],
+    "era": "1970s-present",
+    "nationality": "Canadian",
+    "importance_weight": 0.83,
+    "common_erasure_pattern": "third of Leakey's Angels; least known despite longest-running field study of any wild animal"
+  },
+  {
+    "name": "Rachel Carson",
+    "gender": "female",
+    "fields": [
+      "marine biology",
+      "environmental science",
+      "science writing"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "Silent Spring",
+      "DDT ban",
+      "environmental movement",
+      "pesticide effects"
+    ],
+    "connected_people": [
+      "E.O. Wilson"
+    ],
+    "era": "1950s-1960s",
+    "nationality": "American",
+    "importance_weight": 0.92,
+    "common_erasure_pattern": "framed as alarmist rather than rigorous scientist; industry attacked her credibility rather than her data"
+  },
+  {
+    "name": "Barbara Ward",
+    "gender": "female",
+    "fields": [
+      "economics",
+      "environmental policy",
+      "development"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "sustainable development",
+      "Spaceship Earth",
+      "Stockholm Conference 1972",
+      "North-South divide"
+    ],
+    "connected_people": [
+      "René Dubos",
+      "Robert McNamara"
+    ],
+    "era": "1960s-1980s",
+    "nationality": "British",
+    "importance_weight": 0.83,
+    "common_erasure_pattern": "coined 'sustainable development'; foundational to environmental economics; absent from most curricula"
+  },
+  {
+    "name": "Katharine Burr Blodgett",
+    "gender": "female",
+    "fields": [
+      "physics",
+      "chemistry",
+      "materials science"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "non-reflective glass",
+      "thin film physics",
+      "Langmuir-Blodgett films",
+      "anti-reflective coating"
+    ],
+    "connected_people": [
+      "Irving Langmuir"
+    ],
+    "era": "1920s-1950s",
+    "nationality": "American",
+    "importance_weight": 0.86,
+    "common_erasure_pattern": "invented non-reflective glass used in cameras, eyeglasses, telescopes; credited to lab not her"
+  },
+  {
+    "name": "Olga Taussky-Todd",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "matrix theory",
+      "number theory"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "matrix theory",
+      "Gershgorin circle theorem applications",
+      "algebraic number theory"
+    ],
+    "connected_people": [
+      "John Todd",
+      "Richard Courant"
+    ],
+    "era": "1930s-1980s",
+    "nationality": "Austrian-American",
+    "importance_weight": 0.84,
+    "common_erasure_pattern": "leading matrix theorist of 20th century; underrepresented in linear algebra history"
+  },
+  {
+    "name": "Phyllis Nicolson",
+    "gender": "female",
+    "fields": [
+      "mathematics",
+      "numerical analysis"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "Crank-Nicolson method",
+      "finite difference methods",
+      "heat equation",
+      "numerical stability"
+    ],
+    "connected_people": [
+      "John Crank"
+    ],
+    "era": "1940s-1950s",
+    "nationality": "British",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": "Crank-Nicolson method used in every numerical methods course; her contribution rarely highlighted"
+  },
+  {
+    "name": "Ida Noddack",
+    "gender": "female",
+    "fields": [
+      "chemistry",
+      "nuclear physics"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "rhenium discovery",
+      "nuclear fission prediction",
+      "element 75"
+    ],
+    "connected_people": [
+      "Walter Noddack",
+      "Otto Berg",
+      "Otto Hahn"
+    ],
+    "era": "1920s-1930s",
+    "nationality": "German",
+    "importance_weight": 0.86,
+    "common_erasure_pattern": "predicted nuclear fission in 1934 but was dismissed; Hahn and Meitner received credit for 1938 discovery"
+  }
+]

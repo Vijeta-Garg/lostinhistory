@@ -11,4 +11,3 @@ def extract_nouns(text):
             
 
 
-
