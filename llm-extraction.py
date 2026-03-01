@@ -1,6 +1,5 @@
 import spacy
 from spacy.lang.en.examples import sentences 
-from transformers import pipeline
 def extract_nouns(text):
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(text)
@@ -12,4 +11,4 @@ def extract_nouns(text):
             
 
 
-
+#test commit
