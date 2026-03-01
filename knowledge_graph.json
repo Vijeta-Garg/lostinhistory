@@ -2937,5 +2937,335 @@
     "nationality": "German",
     "importance_weight": 0.86,
     "common_erasure_pattern": "predicted nuclear fission in 1934 but was dismissed; Hahn and Meitner received credit for 1938 discovery"
+  },
+  {
+    "name": "James Watson",
+    "gender": "male",
+    "fields": [
+      "molecular biology",
+      "genetics",
+      "DNA structure"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "DNA double helix",
+      "molecular biology"
+    ],
+    "connected_people": [
+      "Rosalind Franklin",
+      "Francis Crick",
+      "Maurice Wilkins"
+    ],
+    "era": "1950s-1960s",
+    "nationality": "American",
+    "importance_weight": 0.9,
+    "common_erasure_pattern": "credited Franklin's work without permission"
+  },
+  {
+    "name": "Francis Crick",
+    "gender": "male",
+    "fields": [
+      "molecular biology",
+      "genetics",
+      "DNA structure"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "DNA double helix",
+      "molecular biology"
+    ],
+    "connected_people": [
+      "Rosalind Franklin",
+      "James Watson",
+      "Maurice Wilkins"
+    ],
+    "era": "1950s-1960s",
+    "nationality": "British",
+    "importance_weight": 0.9,
+    "common_erasure_pattern": "used Franklin's Photo 51 without her knowledge"
+  },
+  {
+    "name": "Maurice Wilkins",
+    "gender": "male",
+    "fields": [
+      "biophysics",
+      "DNA structure"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "DNA double helix",
+      "X-ray crystallography"
+    ],
+    "connected_people": [
+      "Rosalind Franklin",
+      "James Watson",
+      "Francis Crick"
+    ],
+    "era": "1950s-1960s",
+    "nationality": "British",
+    "importance_weight": 0.8,
+    "common_erasure_pattern": "shared Franklin's data with Watson without her consent"
+  },
+  {
+    "name": "Otto Hahn",
+    "gender": "male",
+    "fields": [
+      "nuclear chemistry",
+      "radioactivity",
+      "fission"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "nuclear fission",
+      "radioactivity"
+    ],
+    "connected_people": [
+      "Lise Meitner",
+      "Fritz Strassmann"
+    ],
+    "era": "1900s-1940s",
+    "nationality": "German",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": "won Nobel for fission without crediting Meitner"
+  },
+  {
+    "name": "Edwin Hubble",
+    "gender": "male",
+    "fields": [
+      "astronomy",
+      "cosmology"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "expanding universe",
+      "galaxy distances",
+      "Hubble constant"
+    ],
+    "connected_people": [
+      "Henrietta Swan Leavitt",
+      "Milton Humason"
+    ],
+    "era": "1920s-1940s",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": "used Leavitt's method to measure universe without crediting her"
+  },
+  {
+    "name": "Alfred Hershey",
+    "gender": "male",
+    "fields": [
+      "genetics",
+      "molecular biology",
+      "bacteriophage"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "DNA as genetic material",
+      "Hershey-Chase experiment",
+      "bacteriophage"
+    ],
+    "connected_people": [
+      "Martha Chase"
+    ],
+    "era": "1950s",
+    "nationality": "American",
+    "importance_weight": 0.82,
+    "common_erasure_pattern": "won Nobel for experiment co-designed and co-executed with Martha Chase"
+  },
+  {
+    "name": "Antony Hewish",
+    "gender": "male",
+    "fields": [
+      "radio astronomy",
+      "astrophysics"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "pulsars",
+      "neutron stars",
+      "radio telescope"
+    ],
+    "connected_people": [
+      "Jocelyn Bell Burnell"
+    ],
+    "era": "1960s-1970s",
+    "nationality": "British",
+    "importance_weight": 0.8,
+    "common_erasure_pattern": "won Nobel for pulsar discovery made by his PhD student Jocelyn Bell Burnell"
+  },
+  {
+    "name": "Joshua Lederberg",
+    "gender": "male",
+    "fields": [
+      "microbiology",
+      "genetics"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "bacterial conjugation",
+      "lambda phage",
+      "replica plating"
+    ],
+    "connected_people": [
+      "Esther Lederberg"
+    ],
+    "era": "1940s-1960s",
+    "nationality": "American",
+    "importance_weight": 0.82,
+    "common_erasure_pattern": "won Nobel for work co-developed with wife Esther Lederberg"
+  },
+  {
+    "name": "Carl Sagan",
+    "gender": "male",
+    "fields": [
+      "astronomy",
+      "cosmology",
+      "science communication"
+    ],
+    "contribution_type": "scholar",
+    "connected_concepts": [
+      "cosmos",
+      "planetary science",
+      "SETI"
+    ],
+    "connected_people": [
+      "Lynn Margulis"
+    ],
+    "era": "1960s-1990s",
+    "nationality": "American",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": ""
+  },
+  {
+    "name": "Charles Babbage",
+    "gender": "male",
+    "fields": [
+      "computing",
+      "mathematics",
+      "engineering"
+    ],
+    "contribution_type": "inventor",
+    "connected_concepts": [
+      "Analytical Engine",
+      "Difference Engine",
+      "computing"
+    ],
+    "connected_people": [
+      "Ada Lovelace"
+    ],
+    "era": "1820s-1870s",
+    "nationality": "British",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": ""
+  },
+  {
+    "name": "Cesar Chavez",
+    "gender": "male",
+    "fields": [
+      "labor rights",
+      "civil rights"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "UFW",
+      "farmworker rights",
+      "labor organizing"
+    ],
+    "connected_people": [
+      "Dolores Huerta"
+    ],
+    "era": "1960s-1990s",
+    "nationality": "American",
+    "importance_weight": 0.88,
+    "common_erasure_pattern": ""
+  },
+  {
+    "name": "Martin Luther King Jr.",
+    "gender": "male",
+    "fields": [
+      "civil rights",
+      "theology"
+    ],
+    "contribution_type": "activist",
+    "connected_concepts": [
+      "civil rights movement",
+      "nonviolent protest",
+      "I Have a Dream"
+    ],
+    "connected_people": [
+      "Rosa Parks",
+      "Ella Baker",
+      "Septima Poinsette Clark",
+      "Diane Nash",
+      "Fannie Lou Hamer"
+    ],
+    "era": "1950s-1960s",
+    "nationality": "American",
+    "importance_weight": 0.97,
+    "common_erasure_pattern": ""
+  },
+  {
+    "name": "Albert Einstein",
+    "gender": "male",
+    "fields": [
+      "physics",
+      "theoretical physics"
+    ],
+    "contribution_type": "primary_discoverer",
+    "connected_concepts": [
+      "special relativity",
+      "general relativity",
+      "photoelectric effect",
+      "E=mc2"
+    ],
+    "connected_people": [
+      "Mileva Maric",
+      "Emmy Noether"
+    ],
+    "era": "1900s-1950s",
+    "nationality": "German-American",
+    "importance_weight": 0.99,
+    "common_erasure_pattern": ""
+  },
+  {
+    "name": "Luc Montagnier",
+    "gender": "male",
+    "fields": [
+      "virology",
+      "HIV research"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "HIV",
+      "AIDS",
+      "retrovirus"
+    ],
+    "connected_people": [
+      "Francoise Barre-Sinoussi"
+    ],
+    "era": "1980s-2000s",
+    "nationality": "French",
+    "importance_weight": 0.85,
+    "common_erasure_pattern": ""
+  },
+  {
+    "name": "Hans Spemann",
+    "gender": "male",
+    "fields": [
+      "developmental biology",
+      "embryology"
+    ],
+    "contribution_type": "co-discoverer",
+    "connected_concepts": [
+      "embryonic induction",
+      "organizer region"
+    ],
+    "connected_people": [
+      "Hilde Mangold"
+    ],
+    "era": "1920s-1930s",
+    "nationality": "German",
+    "importance_weight": 0.82,
+    "common_erasure_pattern": "won Nobel for discovery made with Hilde Mangold who died before the prize"
   }
 ]
