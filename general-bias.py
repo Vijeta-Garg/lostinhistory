@@ -1,7 +1,26 @@
-from transformers import AutoTokenizer, TFAutoModelForSequenceClassification
-from transformers import pipeline
-tokenizer = AutoTokenizer.from_pretrained("d4data/bias-detection-model")
-model = TFAutoModelForSequenceClassification.from_pretrained("d4data/bias-detection-model")
+# from detoxify import Detoxify
+# from transformers import pipeline
+# classifier1 = pipeline("text-classification", model="j-hartmann/emotion-english-distilroberta-base")
+# classifier2 = pipeline("sentiment-analysis", model="cardiffnlp/twitter-roberta-base-sentiment-latest")
+sample_text = "Miss Ada Lovelace, daughter of a poet, has taken an interest in the curious engine of Mr. Babbage. She has produced a series of notes and calculations, which are delightful in their literary flair. Though clever for a lady, it is Mr. Babbage’s practical ingenuity that drives the machine forward, while Miss Lovelace’s efforts remain an elegant amusement."
+# results = Detoxify('unbiased').predict([sample_text])
+# print(results)
+# print(classifier1(sample_text))
+# print(classifier2(sample_text))
 
-classifier = pipeline('text-classification', model=model, tokenizer=tokenizer) # cuda = 0,1 based on gpu availability
-classifier("The irony, of course, is that the exhibit that invites people to throw trash at vacuuming Ivanka Trump lookalike reflects every stereotype feminists claim to stand against, oversexualizing Ivanka’s body and ignoring her hard work.")
+import requests
+def analyze_tone(text):
+    response = requests.post('http://127.0.0.1/api/generate', json={
+        "model": "llama3",
+        "prompt": f"""Analyze how {text} represents the women in event, achievement, or description explained with the following metrics:
+            - score: 0-10 (0: very dismissive, 10: very inclusive)
+            - tone: one word describing the tone of the description the women involved
+            - reason: one sentence summary of your analysis
+        Text: {text}
+        """,
+        "stream":False
+       
+    })
+    return response.json()['response']
+print(analyze_tone(sample_text))
+    

@@ -6,9 +6,16 @@ def extract_nouns(text):
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(text)
     words = []
+    not_needed = []
     for token in doc:
         if token.pos_ == "PROPN" and token.text not in words and token.text:
             words.append(token.text)
+    for ent in doc.ents:
+        if ent.label_ == 'NORP' or ent.label_ == 'FAC' or ent.label_ == 'ORG' or ent.label_ == 'GPE' or ent.label_ == 'LOC' or ent.label_ == 'LANGUAGE' or ent.label_ == 'DATE' or ent.label_ == 'PERCENT' or ent.label_ == 'TIME' or ent.label_ == 'QUANTITY' or ent.label_ == 'ORDINAL' or ent.label_ == 'MONEY' or ent.label_ == 'CARDINAL':
+            not_needed.append(ent.text)
+    for word in not_needed:
+        if word in words:
+            words.remove(word)
     return words
 
 def extract_names(text):
