@@ -32,7 +32,7 @@ class GraphEngine:
         self.betweenness = nx.betweenness_centrality(self.graph, weight=None)
         self.pagerank = nx.pagerank(self.graph)
 
-    def _build_graph(self):
+def _build_graph(self):
     # Add nodes from knowledge graph
     for entry in self.data:
         self.graph.add_node(
