@@ -47,11 +47,10 @@ def listener(event):
         get_names(data)
         get_nouns(data)
         get_women(data)
-        db.reference('paragraphs').push({
-            'names': names,
-            'nouns': proper_nouns,
-            'women': women
-        })
+        para_num = db.reference("current_paragraph_number").get()
+        db.reference(f"paragraph number {para_num} names").set(names)
+        db.reference(f"paragraph number {para_num} nouns").set(proper_nouns)
+        db.reference(f"paragraph number {para_num} women").set(women)
         print('uploaded successfully!')
 ref = db.reference("current_paragraph")
 ref.listen(listener)
