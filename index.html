@@ -208,6 +208,27 @@ function setupObserver() {
   document.querySelectorAll(".para").forEach(p => observer.observe(p));
 }
 
+function injectDemoResults() {
+    const demoResults = {
+        p0: {
+            nodes: [
+                { id: "watson", label: "Watson", type: "mentioned", role: "Biologist" },
+                { id: "crick", label: "Crick", type: "mentioned", role: "Biologist" },
+                { id: "wilkins", label: "Wilkins", type: "mentioned", role: "Crystallographer" },
+                { id: "franklin", label: "R. Franklin", fullLabel: "Rosalind Franklin", type: "missing", role: "X-ray crystallographer", note: "Produced Photo 51, the key evidence for the double helix", erasure: "Uncredited in the original paper" }
+            ],
+            edges: [
+                { s: "watson", t: "crick" },
+                { s: "wilkins", t: "franklin", dash: true }
+            ]
+        }
+    };
+
+    Object.entries(demoResults).forEach(([paraId, result]) => {
+        setTimeout(() => drawGroup(paraId, result), 500);
+    });
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // SEND PARAGRAPH TO FIREBASE
 // Writes to: current_paragraph/{sessionId}
@@ -535,6 +556,7 @@ window.addEventListener("load", () => {
   renderSections(sections, filename);
   setSvgSize();
   setupObserver();
+  injectDemoResults();
 });
 
 window.addEventListener("resize", setSvgSize);
