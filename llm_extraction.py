@@ -1,6 +1,7 @@
 import spacy
 from graph_engine import GraphEngine
 engine = GraphEngine('./knowledge_graph.json')
+
 def extract_nouns(text):
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(text)
@@ -19,8 +20,9 @@ def extract_names(text):
             words.append(ent.text)
     return words
 def extract_women(text):
-    nouns = extract_names(text)
-    women = engine._resolve_extracted_names(nouns)
+    names = extract_names(text)
+    results = engine.analyze(names)
+    women = [w['name'] for w in results['missing_women']]
     print(women)
     return women
 
@@ -32,3 +34,5 @@ print(extract_women("In 1953, James Watson and Francis Crick published their lan
 # print(engine._resolve_name("Rosalind Franklin"))
 # print(engine.graph.nodes.get("Rosalind Franklin"))
 # print(list(engine.graph.neighbors("Rosalind Franklin")))    
+
+
