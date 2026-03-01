@@ -1,26 +1,22 @@
-# from detoxify import Detoxify
-# from transformers import pipeline
-# classifier1 = pipeline("text-classification", model="j-hartmann/emotion-english-distilroberta-base")
-# classifier2 = pipeline("sentiment-analysis", model="cardiffnlp/twitter-roberta-base-sentiment-latest")
-sample_text = "Miss Ada Lovelace, daughter of a poet, has taken an interest in the curious engine of Mr. Babbage. She has produced a series of notes and calculations, which are delightful in their literary flair. Though clever for a lady, it is Mr. Babbage’s practical ingenuity that drives the machine forward, while Miss Lovelace’s efforts remain an elegant amusement."
-# results = Detoxify('unbiased').predict([sample_text])
-# print(results)
-# print(classifier1(sample_text))
-# print(classifier2(sample_text))
+from huggingface_hub import InferenceClient
 
-import requests
+client = InferenceClient(
+    model="meta-llama/Llama-3.2-3B-Instruct",
+    token="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"
+)
 def analyze_tone(text):
-    response = requests.post('http://127.0.0.1/api/generate', json={
-        "model": "llama3",
-        "prompt": f"""Analyze how {text} represents the women in event, achievement, or description explained with the following metrics:
-            - score: 0-10 (0: very dismissive, 10: very inclusive)
-            - tone: one word describing the tone of the description the women involved
-            - reason: one sentence summary of your analysis
-        Text: {text}
-        """,
-        "stream":False
-       
-    })
-    return response.json()['response']
+    response = client.chat_completion(
+        messages=[{
+            "role": "user",
+            "content": f"""Analyze how this text represents the women in the event or achievement described. Describe the following in a cohesive paragraph:
+            - score: 0-10 (0: very dismissive, 10: very inclusive), but don't include the score number just rank it
+            - tone: one word describing the tone toward women
+            - reason: one sentence summary
+            no additional text before or after this, just that paragraph
+            Text: {text}"""
+        }],
+        max_tokens=200
+    )
+    return response.choices[0].message.content
+sample_text = "Miss Ada Lovelace, daughter of a poet, has taken an interest in the curious engine of Mr. Babbage. She has produced a series of notes and calculations, which are delightful in their literary flair. Though clever for a lady, it is Mr. Babbage's practical ingenuity that drives the machine forward, while Miss Lovelace's efforts remain an elegant amusement."
 print(analyze_tone(sample_text))
-    
