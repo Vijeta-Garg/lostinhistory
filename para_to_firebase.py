@@ -1,7 +1,6 @@
 import os
 import firebase_admin
 from firebase_admin import credentials, db
-import hashlib
 # This builds the path relative to firebase_config.py's location
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 cred = credentials.Certificate(os.path.join(BASE_DIR, 'serviceAccountKey.json'))
@@ -43,17 +42,16 @@ def get_women(text):
 #     print('uploaded successfully')
     
 def listener(event):
-    text = event.data
-    if text and isinstance(text, str):
-        get_names(text)
-        get_nouns(text)
-        get_women(text)
-        db.reference('paragraphs').push ({
-        'nouns': proper_nouns,
-        'names': names,
-        'women': women
+    data = event.data
+    if data and isinstance(data, str):
+        get_names(data)
+        get_nouns(data)
+        get_women(data)
+        db.reference('paragraphs').push({
+            'names': names,
+            'nouns': proper_nouns,
+            'women': women
         })
         print('uploaded successfully!')
-
 ref = db.reference("current_paragraph")
 ref.listen(listener)
