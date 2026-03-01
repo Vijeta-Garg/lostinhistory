@@ -1,16 +1,5 @@
 """
-graph_engine.py
----------------
-Plug this into your backend. 
-The LLM/NER person gives you a list of names extracted from the PDF.
-This file does everything else: builds the graph, finds missing women,
-calculates gender ratio, ranks omissions by importance.
 
-Usage:
-    from graph_engine import GraphEngine
-    engine = GraphEngine("knowledge_graph.json")
-    results = engine.analyze(["Watson", "Crick", "Darwin", "Mendel"])
-    print(results)
 """
 
 import json
@@ -20,58 +9,74 @@ from collections import deque
 
 class GraphEngine:
     def __init__(self, knowledge_graph_path: str):
-        """Load the knowledge graph JSON and build a NetworkX graph."""
+      
         with open(knowledge_graph_path, "r") as f:
             self.data = json.load(f)
 
-        # Map name → entry for quick lookup
+        # entry
         self.people = {entry["name"]: entry for entry in self.data}
 
-        # Also build a lookup by last name and common short names for fuzzy matching
+        #  build a lookup by last name and common short names 
         self.name_index = {}
         for entry in self.data:
             full = entry["name"].lower()
             last = full.split()[-1]
             self.name_index[full] = entry["name"]
-            self.name_index[last] = entry["name"]  # "Franklin" → "Rosalind Franklin"
+            self.name_index[last] = entry["name"]  # "Franklin" = "Rosalind Franklin"
 
-        # Build the reference graph
+        # Build  ref graph
         self.graph = nx.Graph()
         self._build_graph()
 
-        # Pre-compute centrality scores (slow on huge graphs, fine for 150 nodes)
+        # centrality scores 
         self.betweenness = nx.betweenness_centrality(self.graph, weight=None)
         self.pagerank = nx.pagerank(self.graph)
 
-    def _build_graph(self):
-        """Add all people as nodes, then connect them via connected_people."""
-        # Add nodes
-        for entry in self.data:
-            self.graph.add_node(
-                entry["name"],
-                gender=entry["gender"],
-                fields=entry["fields"],
-                era=entry["era"],
-                importance_weight=entry["importance_weight"],
-                erasure_pattern=entry.get("common_erasure_pattern", ""),
-                contribution_type=entry["contribution_type"],
-                connected_concepts=entry.get("connected_concepts", []),
-            )
+    ddef _build_graph(self):
+    # Add nodes from knowledge graph
+    for entry in self.data:
+        self.graph.add_node(
+            entry["name"],
+            gender=entry["gender"],
+            fields=entry["fields"],
+            era=entry["era"],
+            importance_weight=entry["importance_weight"],
+            erasure_pattern=entry.get("common_erasure_pattern", ""),
+            contribution_type=entry["contribution_type"],
+            connected_concepts=entry.get("connected_concepts", []),
+        )
 
-        # Add edges
-        for entry in self.data:
-            for connected_name in entry.get("connected_people", []):
-                # Try to resolve short names like "Watson" → "James Watson"
-                resolved = self._resolve_name(connected_name)
-                if resolved and resolved in self.graph:
-                    self.graph.add_edge(entry["name"], resolved, relationship="connected_to")
+    # Add placeholder nodes for anyone in connected_people not in our dataset
+    for entry in self.data:
+        for connected_name in entry.get("connected_people", []):
+            if connected_name not in self.graph:
+                self.graph.add_node(
+                    connected_name,
+                    gender="unknown",
+                    fields=[],
+                    era="",
+                    importance_weight=0.5,
+                    erasure_pattern="",
+                    contribution_type="unknown",
+                    connected_concepts=[],
+                )
+                self.name_index[connected_name.lower()] = connected_name
+                last = connected_name.lower().split()[-1]
+                self.name_index[last] = connected_name
+
+    # Add edges
+    for entry in self.data:
+        for connected_name in entry.get("connected_people", []):
+            resolved = self._resolve_name(connected_name)
+            if resolved and resolved in self.graph:
+                self.graph.add_edge(entry["name"], resolved, relationship="connected_to")
 
     def _resolve_name(self, name: str) -> str | None:
         """Try to find a full name from a partial name."""
         lower = name.lower()
         if lower in self.name_index:
             return self.name_index[lower]
-        # Try last name only
+        #  last name only
         for key, val in self.name_index.items():
             if lower in key:
                 return val
@@ -98,8 +103,7 @@ class GraphEngine:
             r = self._resolve_name(name)
             if r:
                 resolved.append(r)
-        # Deduplicate: if both "Nettie Stevens" and "Nettie Maria Stevens" resolved,
-        # keep only the one whose name appears as a substring of another (drop the shorter)
+        # Deduplicate
         resolved = list(set(resolved))
         final = []
         for name in resolved:
@@ -114,9 +118,7 @@ class GraphEngine:
 
     def bfs_find_missing_women(self, mentioned_names: list[str], depth: int = 2) -> list[dict]:
         """
-        BFS from each mentioned node in the reference graph.
-        Find women within `depth` hops who are NOT in the document.
-        Returns list of missing women with their info.
+        BFS 
         """
         mentioned_set = set(mentioned_names)
         missing_women = {}
@@ -171,7 +173,7 @@ class GraphEngine:
     def rank_omissions(self, missing_women: list[dict]) -> list[dict]:
         """
         Sort missing women by composite importance score.
-        Score = 0.4 * importance_weight + 0.35 * pagerank_normalized + 0.25 * betweenness_normalized
+    
         Higher score = bigger omission = show first / bigger node in graph.
         """
         if not missing_women:
@@ -219,15 +221,7 @@ class GraphEngine:
         }
 
     def analyze(self, extracted_names: list[str], bfs_depth: int = 2) -> dict:
-        """
-        MAIN FUNCTION — call this with the list of names from the NER/LLM person.
-        
-        Returns everything needed for the frontend:
-        - resolved names found in our graph
-        - missing women ranked by importance
-        - gender ratio stats
-        - graph data (nodes + edges) formatted for D3 / react-force-graph
-        """
+       
         # Resolve names to our graph
         resolved = self._resolve_extracted_names(extracted_names)
 
@@ -251,8 +245,7 @@ class GraphEngine:
 
     def _completeness_score(self, mentioned: list[str], missing: list[dict]) -> float:
         """
-        How complete is the document's representation?
-        Score = mentioned women / (mentioned women + missing women)
+       
         0.0 = no women mentioned, 1.0 = no women missing
         """
         mentioned_women = sum(
@@ -266,7 +259,7 @@ class GraphEngine:
 
     def _build_frontend_graph(self, mentioned: list[str], missing: list[dict]) -> dict:
         """
-        Format nodes and edges for react-force-graph or D3.
+       
         
         Node colors:
         - blue: mentioned male
@@ -295,7 +288,7 @@ class GraphEngine:
             })
             added_nodes.add(name)
 
-        # Add missing women nodes (these bloom in during the animation)
+        # Add missing women nodes 
         for woman in missing:
             name = woman["name"]
             if name in added_nodes:
@@ -304,7 +297,7 @@ class GraphEngine:
                 "id": name,
                 "label": name,
                 "gender": "female",
-                "status": "missing",  # frontend uses this to trigger glow animation
+                "status": "missing",  
                 "color": "#ff69b4",
                 "glow": True,
                 "size": 6 + woman["omission_score"] * 20,
@@ -316,7 +309,7 @@ class GraphEngine:
             })
             added_nodes.add(name)
 
-        # Add edges between all nodes now in the graph
+        # Add edges between all nodes 
         seen_edges = set()
         for u, v, data in self.graph.edges(data=True):
             if u in added_nodes and v in added_nodes:
