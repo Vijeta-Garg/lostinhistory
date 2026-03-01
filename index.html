@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TextbookAnalytica</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+  :root {
+    --bg: #f9f7f3;
+    --paper: #fdfcfa;
+    --ink: #1c1c1c;
+    --ink-light: #5a5a5a;
+    --ink-dim: #aaa;
+    --rule: #e5e1d8;
+    --col-mentioned: #1d4ed8;
+    --col-missing: #b91c1c;
+    --col-concept: #5b21b6;
+    --text-max: 580px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  /* ── TOP BAR ───────────────────────────────── */
+  .topbar {
+    position: sticky; top: 0; z-index: 200;
+    height: 50px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center;
+    padding: 0 32px;
+    gap: 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .logo {
+    font-family: 'Lora', serif; font-size: 16px; font-weight: 600;
+    color: var(--ink); letter-spacing: -0.3px; margin-right: auto;
+  }
+  .logo em { font-style: italic; color: var(--col-missing); }
+
+  .legend {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'Inter', sans-serif; font-size: 11px; color: var(--ink-light);
+  }
+  .leg { display: flex; align-items: center; gap: 5px; }
+  .leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  .btn {
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.6px; text-transform: uppercase;
+    background: var(--ink); color: var(--paper);
+    border: none; padding: 7px 16px; border-radius: 5px;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .btn:hover { background: #333; }
+  .btn.done { background: var(--col-missing); pointer-events: none; }
+
+  /* ── PAGE ──────────────────────────────────── */
+  /* One wide container; text sits left, graph SVG is absolute overlay */
+  .page {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 32px 140px;
+  }
+
+  /* ── TEXT ──────────────────────────────────── */
+  .text-body {
+    max-width: var(--text-max);
+  }
+
+  .doc-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px; font-weight: 500; letter-spacing: 1.8px;
+    text-transform: uppercase; color: var(--ink-dim);
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: 'Lora', serif; font-size: 26px; font-weight: 600;
+    line-height: 1.22; letter-spacing: -0.4px;
+    margin-bottom: 36px; color: var(--ink);
+  }
+  .section {
+    font-family: 'Inter', sans-serif;
+    font-size: 9.5px; font-weight: 600; letter-spacing: 1.8px;
+    text-transform: uppercase; color: var(--ink-dim);
+    margin: 34px 0 12px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .para {
+    font-size: 15px; line-height: 1.85; color: #2c2c2c;
+    margin-bottom: 20px; position: relative;
+    transition: padding-left 0.4s, border-left 0.4s;
+  }
+  .para.flagged {
+    padding-left: 14px;
+    border-left: 2.5px solid #c97316;
+  }
+
+  .nm { /* mentioned name */
+    color: var(--col-mentioned); font-weight: 600;
+    border-bottom: 1.5px solid rgba(29,78,216,0.25);
+    cursor: default;
+  }
+
+  /* ── GRAPH OVERLAY ─────────────────────────── */
+  #graph-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  /* nodes need pointer events */
+  #graph-canvas .n-group {
+    pointer-events: all;
+    cursor: pointer;
+  }
+
+  /* ── TOOLTIP ───────────────────────────────── */
+  .tip {
+    position: fixed; z-index: 999;
+    background: #1c1c1c; color: #f5f5f5;
+    font-family: 'Inter', sans-serif; font-size: 12px; line-height: 1.55;
+    padding: 11px 15px; border-radius: 8px; max-width: 230px;
+    pointer-events: none;
+    opacity: 0; transition: opacity 0.15s;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+  }
+  .tip.show { opacity: 1; }
+  .tip-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .tip-role { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #f97316; margin-bottom: 6px; }
+  .tip-note { color: #ccc; }
+
+  /* ── FOOTER ────────────────────────────────── */
+  .footer {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+    height: 42px; background: var(--paper);
+    border-top: 1px solid var(--rule);
+    display: flex; align-items: center; padding: 0 32px; gap: 16px;
+    font-family: 'Inter', sans-serif; font-size: 11px; color: var(--ink-dim);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.04);
+  }
+  .f-label { letter-spacing: 1px; text-transform: uppercase; font-size: 9.5px; }
+  .f-track { width: 160px; height: 3px; background: var(--rule); border-radius: 2px; overflow:hidden; }
+  .f-fill { height: 100%; background: linear-gradient(90deg, var(--col-missing), #c97316); width: 0%; transition: width 1.5s ease; }
+  .f-score { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink); }
+  .f-omit { margin-left: auto; font-family: 'JetBrains Mono', monospace; color: var(--col-missing); font-size: 11px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">Textbook<em>Analytica</em></div>
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:var(--col-mentioned)"></div>mentioned</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--col-missing)"></div>omitted</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--col-concept)"></div>concept</div>
+  </div>
+  <button class="btn" id="analyzeBtn" onclick="runAnalysis()">▶ Analyze</button>
+</div>
+
+<div class="page" id="page">
+
+  <div class="text-body">
+    <div class="doc-label">Biology · Chapter 4 · Molecular Genetics</div>
+    <h1>The Structure of DNA &amp; the History of Its Discovery</h1>
+
+    <div class="section">4.1 — Chemical Basis of Heredity</div>
+    <p class="para" id="p0">
+      The study of molecular genetics began in the mid-twentieth century as scientists sought to understand the chemical basis of heredity. Early transformation experiments by <span class="nm">Avery, MacLeod, and McCarty</span> established that DNA — not protein — was responsible for transmitting genetic information between generations.
+    </p>
+
+    <p class="para" id="p1">
+      The pivotal breakthrough came in 1953, when <span class="nm" id="t-watson">James Watson</span> and <span class="nm" id="t-crick">Francis Crick</span> published their famous double-helix model in <em>Nature</em>. Their model explained how DNA could be replicated faithfully and how genetic information could be encoded in the linear sequence of nucleotide bases.
+    </p>
+
+    <p class="para" id="p2">
+      Key to determining DNA's structure was X-ray crystallography. Diffraction patterns revealed the molecule's helical geometry. <em>Photo 51</em> — among the clearest crystallographic images of DNA yet produced — provided precise angular measurements and helical parameters that proved decisive in finalizing the model.
+    </p>
+
+    <div class="section">4.2 — Chromosomal Sex Determination</div>
+    <p class="para" id="p3">
+      The chromosomal basis of sex was established in the early 1900s. <span class="nm" id="t-morgan">Thomas Hunt Morgan</span> used <em>Drosophila</em> to demonstrate that genes are carried on chromosomes, earning the Nobel Prize in 1933. Chromosome studies of the era established that females carry XX and males carry XY.
+    </p>
+
+    <div class="section">4.3 — Nuclear Fission &amp; Radioactive Tracers</div>
+    <p class="para" id="p4">
+      Atomic physics informed biology through radioactive tracer techniques. <span class="nm" id="t-hahn">Otto Hahn</span> and <span class="nm" id="t-strassmann">Fritz Strassmann</span> achieved nuclear fission in 1938, showing that uranium nuclei could be split — a discovery that opened new methods for labeling and tracking molecules inside living cells.
+    </p>
+  </div>
+
+  <!-- The single graph SVG lives inside .page so it shares the same coordinate space -->
+  <svg id="graph-canvas"></svg>
+
+</div>
+
+<div class="tip" id="tip"></div>
+
+<div class="footer">
+  <span class="f-label">Completeness</span>
+  <div class="f-track"><div class="f-fill" id="fFill"></div></div>
+  <span class="f-score" id="fScore">—</span>
+  <span class="f-omit" id="fOmit"></span>
+</div>
+
+<script>
+// ─── CONFIG ─────────────────────────────────────────────────────────────────
+const C = {
+  mentioned: "#1d4ed8",
+  missing:   "#b91c1c",
+  concept:   "#5b21b6",
+};
+const FILL = {
+  mentioned: "rgba(29,78,216,0.10)",
+  missing:   "rgba(185,28,28,0.10)",
+  concept:   "rgba(91,33,182,0.10)",
+};
+
+// Each group: which paragraph to anchor to, and nodes + edges
+// Anchor node is the first in each group — it sits right at the paragraph's right edge
+const groups = [
+  {
+    para: "p1",
+    nodes: [
+      { id: "watson",   label: "Watson",     type: "mentioned", r: 13 },
+      { id: "crick",    label: "Crick",       type: "mentioned", r: 13 },
+      { id: "dna",      label: "DNA Helix",   type: "concept",   r: 17 },
+      { id: "franklin", label: "R. Franklin", type: "missing",   r: 15,
+        role: "PRIMARY DISCOVERER",
+        note: "Franklin's X-ray data was used without her credit to confirm the double-helix. She is not named." },
+    ],
+    edges: [
+      { s:"watson",   t:"dna",      dash: false },
+      { s:"crick",    t:"dna",      dash: false },
+      { s:"franklin", t:"dna",      dash: true  },
+      { s:"franklin", t:"watson",   dash: true  },
+    ]
+  },
+  {
+    para: "p2",
+    nodes: [
+      { id: "xray",     label: "X-ray Cryst.", type: "concept",  r: 16 },
+      { id: "photo51",  label: "Photo 51",      type: "concept",  r: 13 },
+      { id: "franklin2",label: "R. Franklin",   type: "missing",  r: 15,
+        role: "AUTHOR — PHOTO 51",
+        note: "Photo 51 was Franklin's image. The passage describes it in passive voice, erasing her authorship entirely." },
+    ],
+    edges: [
+      { s:"xray",     t:"photo51",   dash: false },
+      { s:"franklin2",t:"xray",      dash: true  },
+      { s:"franklin2",t:"photo51",   dash: true  },
+    ]
+  },
+  {
+    para: "p3",
+    nodes: [
+      { id: "morgan",  label: "T.H. Morgan", type: "mentioned", r: 13 },
+      { id: "xy",      label: "XY System",   type: "concept",   r: 16 },
+      { id: "stevens", label: "N. Stevens",  type: "missing",   r: 15,
+        role: "DISCOVERER — XY SEX CHROMOSOMES",
+        note: "Stevens independently discovered the XY system before Morgan. She is absent from this account." },
+    ],
+    edges: [
+      { s:"morgan",  t:"xy",     dash: false },
+      { s:"stevens", t:"xy",     dash: true  },
+      { s:"stevens", t:"morgan", dash: true  },
+    ]
+  },
+  {
+    para: "p4",
+    nodes: [
+      { id: "hahn",    label: "O. Hahn",     type: "mentioned", r: 13 },
+      { id: "strass",  label: "Strassmann",  type: "mentioned", r: 12 },
+      { id: "fission", label: "Fission",     type: "concept",   r: 16 },
+      { id: "meitner", label: "L. Meitner",  type: "missing",   r: 15,
+        role: "CO-DISCOVERER — EXCLUDED FROM NOBEL",
+        note: "Meitner developed the theoretical framework for fission with Hahn. He alone received the 1944 Nobel Prize." },
+    ],
+    edges: [
+      { s:"hahn",    t:"fission", dash: false },
+      { s:"strass",  t:"fission", dash: false },
+      { s:"meitner", t:"fission", dash: true  },
+      { s:"meitner", t:"hahn",    dash: true  },
+    ]
+  }
+];
+
+// ─── LAYOUT HELPERS ─────────────────────────────────────────────────────────
+function getParaRight(paraId) {
+  // Returns {x, y} in page-relative coords where the paragraph's right edge is
+  const page = document.getElementById("page");
+  const para = document.getElementById(paraId);
+  const pageRect = page.getBoundingClientRect();
+  const paraRect = para.getBoundingClientRect();
+  return {
+    x: paraRect.right - pageRect.left,
+    y: (paraRect.top + paraRect.bottom) / 2 - pageRect.top,
+  };
+}
+
+function getPageWidth() {
+  return document.getElementById("page").getBoundingClientRect().width;
+}
+
+// ─── DRAW ────────────────────────────────────────────────────────────────────
+const svg = d3.select("#graph-canvas");
+let allSimulations = [];
+
+function setSvgSize() {
+  const page = document.getElementById("page");
+  svg
+    .attr("width",  page.scrollWidth)
+    .attr("height", page.scrollHeight);
+}
+
+function drawGroup(groupIndex) {
+  const g = groups[groupIndex];
+  const anchor = getParaRight(g.para);
+  const pageW  = getPageWidth();
+
+  // Available margin space to the right of the text column
+  const marginLeft  = anchor.x + 24;   // start just past the text
+  const marginRight = pageW - 16;
+  const marginW     = marginRight - marginLeft;
+  const marginH     = 160;
+
+  // Center of the margin area
+  const cx = marginLeft + marginW / 2;
+  const cy = anchor.y;
+
+  // Clone nodes with starting positions near anchor
+  const nodes = g.nodes.map((n, i) => ({
+    ...n,
+    x: cx + (Math.random() - 0.5) * 40,
+    y: cy + (Math.random() - 0.5) * 40,
+  }));
+
+  const nodeMap = Object.fromEntries(nodes.map(n => [n.id, n]));
+  const links = g.edges.map(e => ({
+    source: nodeMap[e.s],
+    target: nodeMap[e.t],
+    dash: e.dash,
+  }));
+
+  const grpEl = svg.append("g").attr("class", `group-${groupIndex}`);
+
+  // ── edges ──
+  const linkSel = grpEl.selectAll("line")
+    .data(links).enter().append("line")
+    .attr("stroke", d =>
+      (d.source.type === "missing" || d.target.type === "missing")
+        ? C.missing : "#bbb")
+    .attr("stroke-width", 1.2)
+    .attr("stroke-opacity", 0.5)
+    .attr("stroke-dasharray", d => d.dash ? "5 3" : "none");
+
+  // ── nodes ──
+  const nodeG = grpEl.selectAll("g")
+    .data(nodes).enter().append("g")
+    .attr("class", "n-group")
+    .on("mouseover", showTip)
+    .on("mousemove", moveTip)
+    .on("mouseout",  hideTip);
+
+  // soft glow ring for missing
+  nodeG.filter(d => d.type === "missing")
+    .append("circle")
+    .attr("r", d => d.r + 7)
+    .attr("fill", "rgba(185,28,28,0.06)")
+    .attr("stroke", C.missing)
+    .attr("stroke-width", 0.8)
+    .attr("stroke-opacity", 0.3)
+    .attr("stroke-dasharray", "3 2");
+
+  const circles = nodeG.append("circle")
+    .attr("r", 0)
+    .attr("fill", d => FILL[d.type])
+    .attr("stroke", d => C[d.type])
+    .attr("stroke-width", d => d.type === "missing" ? 2 : 1.5);
+
+  circles.transition().duration(450).delay((_, i) => i * 90)
+    .attr("r", d => d.r);
+
+  // labels
+  nodeG.append("text")
+    .attr("text-anchor", "middle")
+    .attr("dy", "0.35em")
+    .text(d => d.label)
+    .style("font-family", d => d.type === "missing" ? "'Lora',serif" : "'Inter',sans-serif")
+    .style("font-size", d => d.type === "concept" ? "8px" : "8.5px")
+    .style("font-weight", d => d.type === "missing" ? "600" : "500")
+    .style("fill", d => C[d.type])
+    .style("pointer-events", "none")
+    .attr("opacity", 0)
+    .transition().duration(300).delay((_, i) => i * 90 + 350)
+    .attr("opacity", 1);
+
+  // "omitted" micro-label under missing nodes
+  nodeG.filter(d => d.type === "missing")
+    .append("text")
+    .attr("text-anchor", "middle")
+    .attr("dy", d => d.r + 11)
+    .text("omitted")
+    .style("font-family", "'JetBrains Mono',monospace")
+    .style("font-size", "7px")
+    .style("fill", C.missing)
+    .style("fill-opacity", 0.65)
+    .style("pointer-events", "none");
+
+  // ── force simulation ──
+  const sim = d3.forceSimulation(nodes)
+    .force("link",    d3.forceLink(links).distance(50).strength(0.6))
+    .force("charge",  d3.forceManyBody().strength(-100))
+    .force("centerX", d3.forceX(cx).strength(0.12))
+    .force("centerY", d3.forceY(cy).strength(0.12))
+    .force("collide", d3.forceCollide(d => d.r + 12));
+
+  sim.on("tick", () => {
+    // clamp horizontally into margin; clamp vertically loosely around anchor
+    nodes.forEach(n => {
+      n.x = Math.max(marginLeft + n.r + 4, Math.min(marginRight - n.r - 4, n.x));
+      n.y = Math.max(anchor.y - marginH, Math.min(anchor.y + marginH, n.y));
+    });
+    linkSel
+      .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+    nodeG.attr("transform", d => `translate(${d.x},${d.y})`);
+  });
+
+  setTimeout(() => sim.stop(), 5000);
+  allSimulations.push(sim);
+}
+
+// ─── TOOLTIP ────────────────────────────────────────────────────────────────
+const tipEl = document.getElementById("tip");
+
+function showTip(event, d) {
+  if (!d.note) return;
+  tipEl.innerHTML = `
+    <div class="tip-name">${d.label}</div>
+    <div class="tip-role">${d.role || ""}</div>
+    <div class="tip-note">${d.note}</div>`;
+  tipEl.classList.add("show");
+  moveTip(event);
+}
+function moveTip(event) {
+  let x = event.clientX + 14, y = event.clientY - 10;
+  if (x + 240 > window.innerWidth) x = event.clientX - 250;
+  tipEl.style.left = x + "px";
+  tipEl.style.top  = y + "px";
+}
+function hideTip() { tipEl.classList.remove("show"); }
+
+// ─── ANALYSIS SEQUENCE ──────────────────────────────────────────────────────
+let ran = false;
+
+function runAnalysis() {
+  if (ran) return;
+  ran = true;
+
+  const btn = document.getElementById("analyzeBtn");
+  btn.textContent = "Analyzing…";
+  btn.classList.add("done");
+
+  setSvgSize();
+
+  const schedule = [
+    { para: "p1", groupIdx: 0, delay: 400  },
+    { para: "p2", groupIdx: 1, delay: 1100 },
+    { para: "p3", groupIdx: 2, delay: 1900 },
+    { para: "p4", groupIdx: 3, delay: 2700 },
+  ];
+
+  schedule.forEach(({ para, groupIdx, delay }) => {
+    setTimeout(() => {
+      document.getElementById(para).classList.add("flagged");
+      drawGroup(groupIdx);
+    }, delay);
+  });
+
+  // score
+  setTimeout(() => {
+    document.getElementById("fFill").style.width  = "32%";
+    document.getElementById("fScore").textContent = "32%";
+    document.getElementById("fOmit").textContent  = "4 omissions detected";
+    btn.textContent = "✓ Done";
+  }, 3600);
+}
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+window.addEventListener("load",   setSvgSize);
+window.addEventListener("resize", () => { setSvgSize(); });
+</script>
+</body>
+</html>
